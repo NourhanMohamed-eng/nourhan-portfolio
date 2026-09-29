@@ -86,6 +86,17 @@ export const systems = [
       "Designed the webhook trigger payload schema, configured data cleaning nodes, mapped fields for multi-channel broadcasting, and tested execution across Telegram, Gmail, and Google Sheets.",
     result:
       "The sales team receives immediate Telegram notifications, while leads receive automated confirmation emails and records are appended to Google Sheets in real-time.",
+    automationLogic:
+      "The workflow triggers automatically upon receiving an inbound HTTP POST request from a web form. The raw payload is passed to the Edit Fields (Set) node to sanitize text, normalize phone and email strings, and timestamp the event. Once formatted, execution branches concurrently: an alert message is dispatched to the sales team's Telegram channel, a welcome email is sent to the prospect via Gmail, and a new record is appended to the master Google Sheets CRM.",
+    integrations: [
+      { name: "n8n", role: "Workflow Orchestrator", category: "Core Engine" },
+      { name: "Webhook", role: "HTTP POST trigger for lead capture", category: "Trigger" },
+      { name: "Edit Fields (Set)", role: "Data cleaning and standardization", category: "Processing" },
+      { name: "Telegram Bot API", role: "Immediate sales alert dispatch", category: "Messaging" },
+      { name: "Gmail", role: "Automated lead confirmation email", category: "Email" },
+      { name: "Google Sheets", role: "CRM spreadsheet persistence", category: "Storage" },
+    ],
+    screenshotAlt: "n8n workflow interface showing Lead Submission webhook branching into Telegram alert, Gmail confirmation, and Google Sheets row append.",
     nodes: [
       {
         id: "s1-node-1",
@@ -178,6 +189,23 @@ export const systems = [
       "Configured LangChain agent parameters inside n8n, connected Google Gemini chat model, established conversational memory buffer, attached Google Sheets retrieval tool, and mapped Telegram triggers and outputs.",
     result:
       "Customers receive personalized, context-aware responses backed by live spreadsheet knowledge, without hallucinating out-of-context replies.",
+    automationLogic:
+      "Inbound inquiries arrive as Telegram message events. The message enters the central LangChain AI Agent. Prior to generating a response, the agent consults Simple Memory for session history to maintain multi-turn context. When the user asks about specific business data, the agent dynamically invokes the attached Google Sheets tool to retrieve live records. The query, history, and retrieved rows are processed by the Google Gemini Chat Model to formulate a structured answer, which is transmitted back to the customer on Telegram.",
+    aiLayer: {
+      model: "Google Gemini Chat Model connected as the multimodal LLM engine, configured for concise customer assistance.",
+      memory: "Simple Memory buffer maintaining active dialogue turns so the customer does not have to repeat context.",
+      tools: "Google Sheets integration configured as an agent tool ('read: sheet'), providing deterministic factual lookup from live rows.",
+      architecture: "LangChain Modular Agent pattern with separate sub-ports for Model, Memory, and Tool calling.",
+    },
+    integrations: [
+      { name: "n8n", role: "Workflow Orchestrator", category: "Core Engine" },
+      { name: "LangChain AI Agent", role: "Autonomous Conversational Reasoning", category: "AI Architecture" },
+      { name: "Google Gemini", role: "LLM Chat Model", category: "AI & Model" },
+      { name: "Simple Memory", role: "Multi-turn session buffer", category: "Memory" },
+      { name: "Google Sheets Tool", role: "Live database knowledge retrieval", category: "Tool Calling" },
+      { name: "Telegram Bot API", role: "Bidirectional customer chat channel", category: "Messaging" },
+    ],
+    screenshotAlt: "n8n workflow interface showing LangChain AI Agent connected to Google Gemini Model, Simple Memory, Google Sheets tool, and Telegram I/O.",
     nodes: [
       {
         id: "s2-node-1",
@@ -272,6 +300,17 @@ export const systems = [
       "Configured cron schedule trigger, built Google Sheets retrieval query, developed custom JavaScript logic in the Code node for KPI formulas, and designed email and chat report layouts.",
     result:
       "Operational summaries and KPI health indicators arrive automatically every morning across email and chat channels, eliminating manual daily reporting.",
+    automationLogic:
+      "A Schedule Trigger runs each morning at 9:00 AM. It initiates a read query to Google Sheets, pulling recent transaction logs and operational metrics. The data array is passed to an n8n Code node, where custom JavaScript aggregates figures, calculates performance indicators (such as completion percentages and discrepancy counts), and formats a summary report. The output branches simultaneously into an executive email report via Gmail and a quick-glance status digest via Telegram.",
+    integrations: [
+      { name: "n8n", role: "Workflow Orchestrator", category: "Core Engine" },
+      { name: "Schedule Trigger", role: "Cron execution at 9:00 AM daily", category: "Trigger" },
+      { name: "Google Sheets", role: "Operational database query", category: "Storage" },
+      { name: "Code Node (JavaScript)", role: "KPI metrics computation logic", category: "Computation" },
+      { name: "Telegram Bot API", role: "Admin notification broadcast", category: "Messaging" },
+      { name: "Gmail", role: "Executive report delivery", category: "Email" },
+    ],
+    screenshotAlt: "n8n workflow interface showing 9 AM Schedule Trigger fetching Google Sheets rows, calculating KPIs in Code node, and distributing reports to Telegram and Gmail.",
     nodes: [
       {
         id: "s3-node-1",

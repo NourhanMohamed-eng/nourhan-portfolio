@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { systems } from '../../data/content.en';
 import WorkflowStrip from './WorkflowStrip';
 
-export default function SystemsSection() {
+export default function SystemsSection({ onExplore }) {
   const [expandedId, setExpandedId] = useState('system-01'); // First system open by default
 
   const handleToggle = (id) => {
@@ -49,6 +49,7 @@ export default function SystemsSection() {
               index={index}
               isExpanded={expandedId === system.id}
               onToggle={() => handleToggle(system.id)}
+              onExplore={onExplore}
             />
           ))}
         </div>

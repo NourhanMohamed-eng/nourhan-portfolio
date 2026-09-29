@@ -15,6 +15,7 @@ export default function WorkflowStrip({
   index,
   isExpanded,
   onToggle,
+  onExplore,
 }) {
   const structure = WORKFLOW_STRUCTURES[system.id];
   const [selectedNodeId, setSelectedNodeId] = useState(null);
@@ -194,7 +195,7 @@ export default function WorkflowStrip({
             </div>
           </div>
 
-          {/* Bottom Actions: Explore Workflow (Disabled until Phase 3) */}
+          {/* Bottom Actions: Explore Workflow */}
           <div className="pt-4 border-t border-[#24272C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
@@ -206,15 +207,11 @@ export default function WorkflowStrip({
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                disabled
-                title="Full Case Study View and Deep-Dive Modal arrives in Phase 3"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#15171A] border border-[#24272C] text-[#5A606A] font-mono text-xs cursor-not-allowed select-none opacity-60"
+                onClick={() => onExplore?.(system.id)}
+                className="group inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] font-mono text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
               >
                 <span>Explore Workflow</span>
-                <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#24272C] text-[#8A8F98]">
-                  Phase 3 Preview
-                </span>
-                <ArrowUpRight className="w-3.5 h-3.5 ms-1" />
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </div>
           </div>
