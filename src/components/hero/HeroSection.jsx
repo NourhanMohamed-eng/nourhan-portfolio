@@ -25,7 +25,7 @@ export default function HeroSection() {
             </div>
 
             {/* Editorial Serif Headline */}
-            <h1 className="font-serif text-[28px] sm:text-5xl lg:text-6xl text-[#E8E6E1] tracking-tight leading-[1.12] font-normal mb-5 sm:mb-6">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#E8E6E1] tracking-normal leading-[1.08] font-normal mb-5 sm:mb-6">
               {siteMeta.headlineDisplay}
             </h1>
 

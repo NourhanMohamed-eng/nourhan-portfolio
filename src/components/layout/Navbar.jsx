@@ -69,7 +69,7 @@ export default function Navbar() {
               href="#contact"
               className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] text-xs font-mono transition-all duration-200"
             >
-              <span>Build</span>
+              <span>Let's Build One</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
