@@ -228,7 +228,7 @@ export default function HeroWorkflow() {
 
       {/* Interactive Micro Affordance */}
       <div className="mt-4 pt-3 border-t border-[#1E2025] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 text-[9px] sm:text-[10px] font-mono text-[#5A606A]">
-        <span>AUTONOMOUS EXECUTION LOOP</span>
+        <span>AUTOMATED EXECUTION LOOP</span>
         <span>HOVER TO INSPECT STATE</span>
       </div>
     </div>
