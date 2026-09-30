@@ -131,7 +131,11 @@ export default function ExplorerCanvas({
         <svg
           viewBox={structure.viewBox}
           className="w-full h-auto min-w-[760px] max-w-full select-none"
+          role="img"
+          aria-label={`Interactive workflow canvas for ${system.title}`}
         >
+          <title>{`Interactive workflow canvas for ${system.title}`}</title>
+          <desc>{`Interactive node and edge architecture for ${system.title}. Hover to trace, click to inspect details.`}</desc>
           <defs>
             <filter id="explorer-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="3" result="blur" />

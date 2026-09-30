@@ -77,14 +77,14 @@ export default function ContactSection() {
 
           {/* Email address display (shown as visible text once only) */}
           <div className="pt-2">
-            <span className="font-mono text-xs text-[#5A606A]">
-              Direct inbox: <span className="text-[#8A8F98]">{contactInfo.email}</span>
+            <span className="font-mono text-xs text-[#8A8F98]">
+              Direct inbox: <span className="text-[#E8E6E1]">{contactInfo.email}</span>
             </span>
           </div>
 
           {/* Secondary Links: Plain small text, no logos or badges */}
           <div className="pt-6 border-t border-[#1E2025] flex flex-wrap items-center gap-4 text-xs font-mono">
-            <span className="text-[#5A606A] uppercase tracking-wider text-[10px]">
+            <span className="text-[#8A8F98] uppercase tracking-wider text-[10px]">
               Other Profiles:
             </span>
 

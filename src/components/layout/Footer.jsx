@@ -19,7 +19,7 @@ export default function Footer() {
               NOURHAN MOHAMED
             </span>
           </div>
-          <p className="text-[#5A606A]">
+          <p className="text-[#8A8F98]">
             {siteMeta.footerTagline}
           </p>
         </div>

@@ -79,6 +79,7 @@ export default function HeroWorkflow() {
     <div
       ref={containerRef}
       dir="ltr"
+      role="region"
       className="w-full bg-[#121417] border border-[#24272C] rounded-xl p-4 sm:p-6 lg:p-7 relative overflow-hidden shadow-2xl"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}

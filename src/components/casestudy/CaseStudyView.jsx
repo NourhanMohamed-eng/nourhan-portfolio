@@ -38,6 +38,13 @@ export default function CaseStudyView({ systemId, onNavigate }) {
 
   return (
     <div className="min-h-screen bg-[#0E0F11] text-[#E8E6E1] bg-canvas-dots pb-24 selection:bg-[#3DDC97]/20 selection:text-[#3DDC97]">
+      {/* Skip to Content Link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#3DDC97] focus:text-[#0E0F11] focus:font-mono focus:text-xs focus:font-semibold focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3DDC97]"
+      >
+        Skip to content
+      </a>
       
       {/* 0. Top Navigation / Back Anchor */}
       <header className="sticky top-0 z-40 bg-[#0E0F11]/90 backdrop-blur-md border-b border-[#24272C] py-3.5 px-4 sm:px-6 lg:px-8">
@@ -60,7 +67,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
       </header>
 
       {/* Main Case Study Container */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 space-y-16">
+      <main id="main-content" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 space-y-16">
         
         {/* Header Hero for Case Study */}
         <section className="space-y-4">

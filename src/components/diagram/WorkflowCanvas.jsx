@@ -78,7 +78,11 @@ export default function WorkflowCanvas({
         <svg
           viewBox={structure.viewBox || '0 0 740 280'}
           className="w-full h-auto max-h-[380px] overflow-visible"
+          role="img"
+          aria-label={`Architecture diagram for ${system.title}`}
         >
+          <title>{`Architecture diagram for ${system.title}`}</title>
+          <desc>{system.summary}</desc>
           {/* Subtle dot grid on SVG background */}
           <defs>
             <pattern

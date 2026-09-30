@@ -69,6 +69,14 @@ export default function App() {
   // Route: / (Main Home Page)
   return (
     <div className="min-h-screen bg-[#0E0F11] text-[#E8E6E1] bg-canvas-dots relative selection:bg-[#3DDC97]/20 selection:text-[#3DDC97]">
+      {/* Skip to Content Link for Keyboard Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#3DDC97] focus:text-[#0E0F11] focus:font-mono focus:text-xs focus:font-semibold focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3DDC97]"
+      >
+        Skip to content
+      </a>
+
       {/* Dynamic execution line along the margin */}
       <ExecutionLine />
 
@@ -76,7 +84,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <HeroSection />
         <SystemsSection onExplore={(id) => navigate(`/systems/${id}`)} />
         <Suspense fallback={<ExplorerSkeleton />}>
