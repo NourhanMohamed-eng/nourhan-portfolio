@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import * as contentEn from '../data/content.en';
+import * as contentAr from '../data/content.ar';
 
 const LanguageContext = createContext(null);
 
@@ -87,6 +89,10 @@ export function LanguageProvider({ children }) {
     setRouteInfo(getRouteInfo(nextPath));
   }, [routeInfo, getRouteInfo]);
 
+  const content = useMemo(() => {
+    return routeInfo.lang === 'ar' ? contentAr : contentEn;
+  }, [routeInfo.lang]);
+
   const value = {
     lang: routeInfo.lang,
     dir: routeInfo.lang === 'ar' ? 'rtl' : 'ltr',
@@ -96,6 +102,7 @@ export function LanguageProvider({ children }) {
     currentPath: routeInfo.pathname,
     navigate,
     switchLanguage,
+    content,
   };
 
   return (
@@ -111,4 +118,9 @@ export function useLanguage() {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
+}
+
+export function useContent() {
+  const { content } = useLanguage();
+  return content;
 }

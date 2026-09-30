@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { heroWorkflow } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import {
   Zap,
   Cpu,
@@ -49,6 +49,8 @@ const ACCENT_COLORS = {
 };
 
 export default function HeroWorkflow() {
+  const { heroWorkflow } = useContent();
+  const { isRTL } = useLanguage();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -57,7 +59,7 @@ export default function HeroWorkflow() {
   });
   const [activeStep, setActiveStep] = useState(() => {
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return heroWorkflow.nodes.length;
+      return heroWorkflow?.nodes?.length || 5;
     }
     return 0;
   });
@@ -70,40 +72,41 @@ export default function HeroWorkflow() {
     const updateMotion = (e) => {
       setPrefersReducedMotion(e.matches);
       if (e.matches) {
-        setActiveStep(heroWorkflow.nodes.length);
+        setActiveStep(heroWorkflow?.nodes?.length || 5);
       }
     };
     setPrefersReducedMotion(mediaQuery.matches);
     if (mediaQuery.matches) {
-      setActiveStep(heroWorkflow.nodes.length);
+      setActiveStep(heroWorkflow?.nodes?.length || 5);
     }
 
     mediaQuery.addEventListener('change', updateMotion);
     return () => mediaQuery.removeEventListener('change', updateMotion);
-  }, []);
+  }, [heroWorkflow]);
 
   // Sequential execution: runs through nodes and finishes at EXECUTED ✓
   useEffect(() => {
     if (prefersReducedMotion || isPaused) return;
 
     // If already executed, don't run timer
-    if (activeStep >= heroWorkflow.nodes.length) return;
+    const totalNodes = heroWorkflow?.nodes?.length || 5;
+    if (activeStep >= totalNodes) return;
 
     const interval = setInterval(() => {
       setActiveStep((prev) => {
         const next = prev + 1;
-        if (next >= heroWorkflow.nodes.length) {
+        if (next >= totalNodes) {
           clearInterval(interval);
-          return heroWorkflow.nodes.length;
+          return totalNodes;
         }
         return next;
       });
     }, 850);
 
     return () => clearInterval(interval);
-  }, [prefersReducedMotion, isPaused, activeStep]);
+  }, [prefersReducedMotion, isPaused, activeStep, heroWorkflow]);
 
-  const isComplete = prefersReducedMotion || activeStep >= heroWorkflow.nodes.length;
+  const isComplete = prefersReducedMotion || activeStep >= (heroWorkflow?.nodes?.length || 5);
 
   return (
     <div
@@ -113,7 +116,7 @@ export default function HeroWorkflow() {
       className="w-full bg-[#121417] border border-[#24272C] rounded-xl p-4 sm:p-6 lg:p-7 relative overflow-hidden shadow-2xl"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      aria-label="Interactive automation workflow demonstration"
+      aria-label={isRTL ? "عرض تفاعلي لسير عمل الأتمتة" : "Interactive automation workflow demonstration"}
     >
       {/* Top Console Bar */}
       <div className="flex items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-6 border-b border-[#1E2025] gap-2">

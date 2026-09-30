@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { systems } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import WorkflowStrip from './WorkflowStrip';
 
 export default function SystemsSection({ onExplore }) {
+  const { systems } = useContent();
+  const { isRTL } = useLanguage();
   const [expandedId, setExpandedId] = useState('system-01'); // First system open by default
 
   const handleToggle = (id) => {
@@ -31,17 +33,19 @@ export default function SystemsSection({ onExplore }) {
               id="systems-heading"
               className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#E8E6E1] tracking-normal leading-[1.08] font-normal"
             >
-              Systems I've Built.
+              {isRTL ? "أنظمة قمتُ ببنائها." : "Systems I've Built."}
             </h2>
           </div>
 
           <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-md italic">
-            Three different problems. Three different automation architectures.
+            {isRTL
+              ? "ثلاث مشكلات مختلفة. ثلاث معماريات أتمتة مختلفة."
+              : "Three different problems. Three different automation architectures."}
           </p>
         </div>
 
         {/* Vertical Case-Study List (Accordion Strips) */}
-        <div className="space-y-5" role="region" aria-label="Automated Systems List">
+        <div className="space-y-5" role="region" aria-label={isRTL ? "قائمة الأنظمة المؤتمتة" : "Automated Systems List"}>
           {systems.map((system, index) => (
             <WorkflowStrip
               key={system.id}

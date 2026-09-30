@@ -1,8 +1,11 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
-import { siteMeta, navItems } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 
 export default function Footer() {
+  const { siteMeta, navItems } = useContent();
+  const { isRTL } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,7 +28,7 @@ export default function Footer() {
         </div>
 
         {/* Anchor Links */}
-        <nav aria-label="Footer navigation" className="flex flex-wrap items-center justify-center gap-5 text-[#8A8F98]">
+        <nav aria-label={isRTL ? "روابط أسفل الصفحة" : "Footer navigation"} className="flex flex-wrap items-center justify-center gap-5 text-[#8A8F98]">
           {navItems.map((item) => (
             <a
               key={item.id}
@@ -42,9 +45,9 @@ export default function Footer() {
           type="button"
           onClick={scrollToTop}
           className="inline-flex items-center gap-1.5 text-[#5A606A] hover:text-[#E8E6E1] transition-colors py-2.5 px-3 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
-          aria-label="Back to top of page"
+          aria-label={isRTL ? "العودة لأعلى الصفحة" : "Back to top of page"}
         >
-          <span>Top</span>
+          <span>{isRTL ? "للأعلى" : "Top"}</span>
           <ArrowUp className="w-3.5 h-3.5" />
         </button>
 

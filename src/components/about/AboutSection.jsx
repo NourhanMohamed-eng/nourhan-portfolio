@@ -1,15 +1,18 @@
 import React from 'react';
-import { aboutMe } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { GraduationCap, Award, ShieldCheck, Cog } from 'lucide-react';
 
 const FACT_ICONS = [GraduationCap, Award, ShieldCheck, Cog];
 
 export default function AboutSection() {
+  const { aboutMe } = useContent();
+  const { isRTL } = useLanguage();
+
   return (
     <section
       id="about"
       className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-      aria-label="About Nourhan Mohamed"
+      aria-label={isRTL ? "نبذة عن نورهان محمد" : "About Nourhan Mohamed"}
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
@@ -23,7 +26,7 @@ export default function AboutSection() {
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl text-[#E8E6E1] font-normal leading-[1.08] tracking-normal">
-            Behind The Work.
+            {aboutMe.title}.
           </h2>
 
           <p className="font-sans text-sm sm:text-base text-[#8A8F98] leading-relaxed pt-2">

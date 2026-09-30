@@ -11,6 +11,8 @@ export const siteMeta = {
   headlineDisplay: "I Turn Repetitive Processes Into Automated Systems.",
   headlineSubtitle:
     "AI Automation & Workflow Automation with n8n, APIs, LLMs and structured workflows.",
+  heroCtaPrimary: "Explore the Systems",
+  heroCtaSecondary: "Let's Build One",
   footerTagline: "Built around processes, not templates.",
 };
 

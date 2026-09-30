@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { systems } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { WORKFLOW_STRUCTURES } from '../../data/workflows';
 import ExplorerCanvas from './ExplorerCanvas';
 import NodeInspectorPanel from './NodeInspectorPanel';
 import { ExternalLink, Layers, Terminal, Sparkles } from 'lucide-react';
 
 export default function WorkflowExplorer({ onExploreCaseStudy }) {
+  const { systems } = useContent();
+  const { isRTL } = useLanguage();
   const [activeSystemId, setActiveSystemId] = useState('system-01');
   const [selectedNode, setSelectedNode] = useState(null);
 
@@ -23,7 +25,7 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
     <section
       id="explorer"
       className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-      aria-label="Workflow Explorer: See The Automation"
+      aria-label={isRTL ? "معاينة سير العمل: عاين الأتمتة عمليًا" : "Workflow Explorer: See The Automation"}
     >
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -39,12 +41,13 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl text-[#E8E6E1] font-normal leading-[1.08] tracking-normal">
-            See The Automation.
+            {isRTL ? "عاين الأتمتة عمليًا." : "See The Automation."}
           </h2>
 
           <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-2xl leading-relaxed">
-            Inspect individual nodes, payload schemas, and routing logic across the three systems.
-            Hover over any node to trace connected edges; click to view its schema contract.
+            {isRTL
+              ? "استكشف العقد الفردية وهيكل البيانات ومنطق التوجيه عبر الأنظمة الثلاثة. مرّر المؤشر فوق أي عقدة لتتبّع المسارات، وانقر لعرض مواصفاتها."
+              : "Inspect individual nodes, payload schemas, and routing logic across the three systems. Hover over any node to trace connected edges; click to view its schema contract."}
           </p>
         </div>
 
@@ -55,8 +58,8 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
             onClick={() => onExploreCaseStudy(activeSystem.id)}
             className="self-start md:self-end inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#3DDC97]/40 text-xs font-mono text-[#E8E6E1] transition-all group"
           >
-            <span>Full Case Study</span>
-            <ExternalLink className="w-3.5 h-3.5 text-[#3DDC97] group-hover:translate-x-0.5 transition-transform" />
+            <span>{isRTL ? "دراسة الحالة الكاملة" : "Full Case Study"}</span>
+            <ExternalLink className="w-3.5 h-3.5 text-[#3DDC97] group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-transform" />
           </button>
         )}
       </div>
@@ -64,7 +67,7 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
       {/* 1. Workflow Switcher Tabs */}
       <div
         role="tablist"
-        aria-label="Select workflow to inspect"
+        aria-label={isRTL ? "اختيار سير العمل للمعاينة" : "Select workflow to inspect"}
         className="flex items-center gap-2 p-1.5 rounded-xl bg-[#121417] border border-[#24272C] mb-6 overflow-x-auto scrollbar-none max-w-full"
       >
         {systems.map((sys, idx) => {

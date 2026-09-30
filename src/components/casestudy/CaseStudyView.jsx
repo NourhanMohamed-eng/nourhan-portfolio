@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { systems } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { WORKFLOW_STRUCTURES } from '../../data/workflows';
 import WorkflowCanvas from '../diagram/WorkflowCanvas';
 import ScreenshotFrame from '../ui/ScreenshotFrame';
@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 
 export default function CaseStudyView({ systemId, onNavigate }) {
+  const { systems } = useContent();
+  const { isRTL } = useLanguage();
   const [selectedNodeId, setSelectedNodeId] = useState(null);
 
   const system = systems.find((s) => s.id === systemId) || systems[0];
@@ -43,7 +45,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#3DDC97] focus:text-[#0E0F11] focus:font-mono focus:text-xs focus:font-semibold focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3DDC97]"
       >
-        Skip to content
+        {isRTL ? "الانتقال إلى المحتوى الرئيسي" : "Skip to content"}
       </a>
       
       {/* 0. Top Navigation / Back Anchor */}
@@ -55,11 +57,11 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             className="group inline-flex items-center gap-2 text-xs font-mono text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-2.5 -ms-2.5 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
-            <span>Back to All Systems</span>
+            <span>{isRTL ? "العودة إلى جميع الأنظمة" : "Back to All Systems"}</span>
           </button>
 
           <div className="flex items-center gap-2 text-xs font-mono text-[#5A606A]">
-            <span>SYSTEM {currentIndex + 1} OF 3</span>
+            <span>{isRTL ? `نظام ${currentIndex + 1} من 3` : `SYSTEM ${currentIndex + 1} OF 3`}</span>
             <span className="hidden sm:inline">/</span>
             <span className="text-[#3DDC97] hidden sm:inline">VERIFIED N8N</span>
           </div>
@@ -108,7 +110,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>THE PROBLEM</span>
           </div>
           <h2 className="font-serif text-2xl text-[#E8E6E1] font-normal">
-            What needed to be solved?
+            {isRTL ? "ما المشكلة التي تطلبت حلاً؟" : "What needed to be solved?"}
           </h2>
           <p className="font-sans text-base text-[#8A8F98] leading-relaxed">
             {system.problem}
@@ -124,11 +126,11 @@ export default function CaseStudyView({ systemId, onNavigate }) {
                 <span>SYSTEM ARCHITECTURE</span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#E8E6E1] font-normal">
-                How the nodes connect.
+                {isRTL ? "كيف تترابط العقد وتتكامل." : "How the nodes connect."}
               </h2>
             </div>
             <span className="font-mono text-xs text-[#5A606A]">
-              Click any node to inspect purpose
+              {isRTL ? "انقر على أي عقدة للاطلاع على دورها وبياناتها" : "Click any node to inspect purpose"}
             </span>
           </div>
 
@@ -147,7 +149,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>AUTOMATION LOGIC</span>
           </div>
           <h2 className="font-serif text-2xl text-[#E8E6E1] font-normal">
-            Execution flow and data routing.
+            {isRTL ? "مسار التنفيذ وتوجيه البيانات." : "Execution flow and data routing."}
           </h2>
           <p className="font-sans text-sm sm:text-base text-[#8A8F98] leading-relaxed">
             {system.automationLogic}
@@ -185,7 +187,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>INTEGRATIONS & CONNECTED TOOLS</span>
           </div>
           <h2 className="font-serif text-2xl sm:text-3xl text-[#E8E6E1] font-normal">
-            Connected services solving the workflow.
+            {isRTL ? "الخدمات المرتبطة التي تُشغّل سير العمل." : "Connected services solving the workflow."}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -218,7 +220,9 @@ export default function CaseStudyView({ systemId, onNavigate }) {
               <span>05 / AI LAYER SPECIFICATION</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl text-[#E8E6E1] font-normal">
-              LangChain Agent, Gemini, and Dynamic Tool Calling.
+              {isRTL
+                ? "وكيل LangChain ونموذج Gemini واستدعاء الأدوات الحية."
+                : "LangChain Agent, Gemini, and Dynamic Tool Calling."}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
@@ -264,7 +268,9 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>MY WORK & CONTRIBUTION</span>
           </div>
           <h2 className="font-serif text-2xl text-[#E8E6E1] font-normal">
-            What I designed, built, and configured.
+            {isRTL
+              ? "ما صممته، وبنيته، وضبطته."
+              : "What I designed, built, and configured."}
           </h2>
           <p className="font-sans text-base text-[#E8E6E1] leading-relaxed">
             {system.myWork}
@@ -280,7 +286,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>FUNCTIONAL RESULT</span>
           </div>
           <h2 className="font-serif text-2xl text-[#E8E6E1] font-normal">
-            The operational outcome.
+            {isRTL ? "النتيجة التشغيلية المباشرة." : "The operational outcome."}
           </h2>
           <p className="font-sans text-base text-[#8A8F98] leading-relaxed">
             {system.result}
@@ -298,11 +304,15 @@ export default function CaseStudyView({ systemId, onNavigate }) {
                 <span>WORKFLOW PROOF</span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#E8E6E1] font-normal">
-                Real n8n Workspace Screenshot.
+                {isRTL
+                  ? "لقطة شاشة حقيقية لمساحة عمل n8n."
+                  : "Real n8n Workspace Screenshot."}
               </h2>
             </div>
             <span className="font-mono text-xs text-[#5A606A]">
-              Click preview to view in full resolution Lightbox
+              {isRTL
+                ? "انقر على المعاينة للعرض بدقة كاملة"
+                : "Click preview to view in full resolution Lightbox"}
             </span>
           </div>
 
@@ -316,7 +326,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
         {/* 9. Inter-System Navigation (Bottom Bar) */}
         <nav
           className="pt-12 border-t border-[#24272C] flex flex-col sm:flex-row items-center justify-between gap-4"
-          aria-label="Systems Pagination"
+          aria-label={isRTL ? "التنقل بين دراسات الحالة" : "Systems Pagination"}
         >
           <button
             type="button"
@@ -339,7 +349,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             onClick={() => onNavigate('/')}
             className="font-mono text-xs text-[#8A8F98] hover:text-[#3DDC97] transition-colors py-2 px-3 min-h-[44px] inline-flex items-center justify-center rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           >
-            View All Systems
+            <span>{isRTL ? "عرض كل الأنظمة" : "View All Systems"}</span>
           </button>
 
           <button

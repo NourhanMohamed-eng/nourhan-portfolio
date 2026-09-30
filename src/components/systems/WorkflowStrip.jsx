@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import WorkflowCanvas from '../diagram/WorkflowCanvas';
 import { WORKFLOW_STRUCTURES } from '../../data/workflows';
 import {
@@ -17,6 +18,7 @@ export default function WorkflowStrip({
   onToggle,
   onExplore,
 }) {
+  const { isRTL } = useLanguage();
   const structure = WORKFLOW_STRUCTURES[system.id];
   const [selectedNodeId, setSelectedNodeId] = useState(null);
 
@@ -200,7 +202,9 @@ export default function WorkflowStrip({
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
               <span className="font-mono text-xs text-[#8A8F98]">
-                Real verified workflow implementation from n8n
+                {isRTL
+                  ? 'تنفيذ حقيقي وموثق لسير العمل من n8n'
+                  : 'Real verified workflow implementation from n8n'}
               </span>
             </div>
 
@@ -210,7 +214,7 @@ export default function WorkflowStrip({
                 onClick={() => onExplore?.(system.id)}
                 className="group inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] font-mono text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
               >
-                <span>Explore Workflow</span>
+                <span>{isRTL ? 'استكشف سير العمل' : 'Explore Workflow'}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </div>

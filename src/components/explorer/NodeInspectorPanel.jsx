@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   X,
   Zap,
@@ -38,6 +39,7 @@ export default function NodeInspectorPanel({
   onClose,
   onExploreCaseStudy,
 }) {
+  const { isRTL } = useLanguage();
   const panelRef = useRef(null);
   const closeBtnRef = useRef(null);
   const triggerElementRef = useRef(null);
@@ -90,7 +92,7 @@ export default function NodeInspectorPanel({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Node inspector: ${node.name || node.nodeName}`}
+      aria-label={isRTL ? `معاينة العقدة: ${node.name || node.nodeName}` : `Node inspector: ${node.name || node.nodeName}`}
       className="fixed md:absolute inset-0 md:inset-y-0 md:start-auto md:end-0 md:w-[440px] z-50 md:z-30 flex flex-col justify-end md:justify-start"
     >
       {/* Mobile Backdrop */}
@@ -142,7 +144,7 @@ export default function NodeInspectorPanel({
               type="button"
               onClick={onClose}
               className="p-1.5 rounded-lg text-[#8A8F98] hover:text-[#E8E6E1] hover:bg-[#1E2025] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
-              aria-label="Close inspector panel"
+              aria-label={isRTL ? "إغلاق لوحة المعاينة" : "Close inspector panel"}
             >
               <X className="w-4 h-4" />
             </button>
@@ -242,7 +244,7 @@ export default function NodeInspectorPanel({
               onClick={() => onExploreCaseStudy(system.id)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1E2025] hover:bg-[#282C34] text-xs font-mono text-[#3DDC97] border border-[#3DDC97]/30 hover:border-[#3DDC97] transition-all"
             >
-              <span>Explore Case Study</span>
+              <span>{isRTL ? "استكشف دراسة الحالة" : "Explore Case Study"}</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           )}

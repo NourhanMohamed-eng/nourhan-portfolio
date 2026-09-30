@@ -1,13 +1,16 @@
 import React from 'react';
-import { contactInfo } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { Mail, ArrowUpRight, ArrowRight } from 'lucide-react';
 
 export default function ContactSection() {
+  const { contactInfo } = useContent();
+  const { isRTL } = useLanguage();
+
   return (
     <section
       id="contact"
       className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-      aria-label="Contact and Inquiries"
+      aria-label={isRTL ? "التواصل والاستفسارات" : "Contact and Inquiries"}
     >
       <div className="p-8 sm:p-12 rounded-2xl bg-[#121417] border border-[#24272C] shadow-2xl relative overflow-hidden">
         
@@ -42,12 +45,12 @@ export default function ContactSection() {
             {/* Primary 1: Mailto Action */}
             <a
               href={contactInfo.mailtoHref}
-              aria-label="Send an email to Nourhan Mohamed to start a conversation"
+              aria-label={isRTL ? "إرسال بريد إلكتروني إلى نورهان محمد لبدء محادثة" : "Send an email to Nourhan Mohamed to start a conversation"}
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#3DDC97] hover:bg-[#4AE3A2] text-[#0E0F11] font-mono text-sm font-semibold transition-all duration-200 shadow-lg shadow-[#3DDC97]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0F11]"
             >
               <Mail className="w-4 h-4 stroke-[2.5]" />
               <span>{contactInfo.ctaText}</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              <ArrowRight className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
             </a>
 
             {/* Primary 2: LinkedIn */}
@@ -78,14 +81,14 @@ export default function ContactSection() {
           {/* Email address display (shown as visible text once only) */}
           <div className="pt-2">
             <span className="font-mono text-xs text-[#8A8F98]">
-              Direct inbox: <span className="text-[#E8E6E1]">{contactInfo.email}</span>
+              {isRTL ? "البريد المباشر: " : "Direct inbox: "}<span className="text-[#E8E6E1]">{contactInfo.email}</span>
             </span>
           </div>
 
           {/* Secondary Links: Plain small text, no logos or badges */}
           <div className="pt-6 border-t border-[#1E2025] flex flex-wrap items-center gap-4 text-xs font-mono">
             <span className="text-[#8A8F98] uppercase tracking-wider text-[10px]">
-              Other Profiles:
+              {isRTL ? "منصات أخرى:" : "Other Profiles:"}
             </span>
 
             {contactInfo.secondaryLinks.map((item) => {

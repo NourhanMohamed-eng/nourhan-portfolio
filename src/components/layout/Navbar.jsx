@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { siteMeta, navItems } from '../../data/content.en';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage, useContent } from '../../context/LanguageContext';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 function LanguageSwitcher() {
@@ -45,6 +44,7 @@ function LanguageSwitcher() {
 
 export default function Navbar() {
   const { lang } = useLanguage();
+  const { siteMeta, navItems } = useContent();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isAr = lang === 'ar';

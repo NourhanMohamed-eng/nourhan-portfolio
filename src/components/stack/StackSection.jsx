@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { techStack } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { ArrowRight, Workflow, Bot, Network, Terminal, Globe, Check } from 'lucide-react';
 
 const CATEGORY_ICONS = {
@@ -11,13 +11,15 @@ const CATEGORY_ICONS = {
 };
 
 export default function StackSection() {
+  const { techStack } = useContent();
+  const { isRTL } = useLanguage();
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
     <section
       id="stack"
       className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-      aria-label="Technical Stack and Connected Toolbox"
+      aria-label={isRTL ? "الأدوات التقنية وحقيبة العمل" : "Technical Stack and Connected Toolbox"}
     >
       {/* Header */}
       <div className="space-y-3 mb-12">
@@ -29,11 +31,13 @@ export default function StackSection() {
         </div>
 
         <h2 className="font-serif text-3xl sm:text-4xl text-[#E8E6E1] font-normal leading-[1.08] tracking-normal">
-          What I Build With.
+          {isRTL ? "ما أبني به." : "What I Build With."}
         </h2>
 
         <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-2xl leading-relaxed">
-          Not a wall of disconnected tools, but an integrated system of automation engines, communication protocols, AI models, and data persistence layers.
+          {isRTL
+            ? "ليست مجرد قائمة أدوات منفصلة، بل منظومة متكاملة من محركات الأتمتة، وبروتوكولات التواصل، ونماذج الذكاء الاصطناعي، وقواعد حفظ البيانات."
+            : "Not a wall of disconnected tools, but an integrated system of automation engines, communication protocols, AI models, and data persistence layers."}
         </p>
       </div>
 

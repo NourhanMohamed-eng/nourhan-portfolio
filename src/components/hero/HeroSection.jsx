@@ -1,14 +1,17 @@
 import React from 'react';
-import { siteMeta } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import HeroWorkflow from './HeroWorkflow';
 import { ArrowDown, Play, Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
+  const { siteMeta } = useContent();
+  const { isRTL } = useLanguage();
+
   return (
     <section
       id="hero"
       className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden"
-      aria-label="Introduction"
+      aria-label={isRTL ? "مقدمة" : "Introduction"}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -64,8 +67,8 @@ export default function HeroSection() {
             href="#systems"
             className="group inline-flex items-center justify-center gap-2.5 px-5 py-3.5 min-h-[44px] rounded bg-[#3DDC97] text-[#0E0F11] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#34c788] transition-all shadow-lg shadow-[#3DDC97]/15"
           >
-            <Play className="w-3.5 h-3.5 fill-current transition-transform group-hover:translate-x-0.5" />
-            <span>Explore the Systems</span>
+            <Play className="w-3.5 h-3.5 fill-current transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
+            <span>{siteMeta.heroCtaPrimary || "Explore the Systems"}</span>
             <ArrowDown className="w-3.5 h-3.5 ms-1" />
           </a>
 
@@ -73,7 +76,7 @@ export default function HeroSection() {
             href="#contact"
             className="inline-flex items-center justify-center gap-2 px-5 py-3.5 min-h-[44px] rounded bg-[#15171A] hover:bg-[#1B1E22] text-[#E8E6E1] border border-[#24272C] hover:border-[#363A42] font-mono text-xs uppercase tracking-wider transition-all"
           >
-            <span>Let's Build One</span>
+            <span>{siteMeta.heroCtaSecondary || "Let's Build One"}</span>
           </a>
         </div>
 

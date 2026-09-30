@@ -1,15 +1,18 @@
 import React from 'react';
-import { approachSteps } from '../../data/content.en';
+import { useContent, useLanguage } from '../../context/LanguageContext';
 import { ArrowRight, Search, GitFork, Network, CheckCircle2 } from 'lucide-react';
 
 const STEP_ICONS = [Search, GitFork, Network, CheckCircle2];
 
 export default function AutomationTimeline() {
+  const { approachSteps } = useContent();
+  const { isRTL } = useLanguage();
+
   return (
     <section
       id="approach"
       className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
-      aria-label="Approach: Automation Methodology"
+      aria-label={isRTL ? "المنهج: منهجية الأتمتة" : "Approach: Automation Methodology"}
     >
       {/* Header */}
       <div className="space-y-3 mb-14">
@@ -21,11 +24,13 @@ export default function AutomationTimeline() {
         </div>
 
         <h2 className="font-serif text-3xl sm:text-4xl text-[#E8E6E1] font-normal leading-[1.08] tracking-normal max-w-2xl">
-          I Don't Start With Tools. I Start With The Process.
+          {isRTL ? "لا أبدأ بالأدوات. أبدأ بالعملية." : "I Don't Start With Tools. I Start With The Process."}
         </h2>
 
         <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-2xl leading-relaxed">
-          Before configuring nodes or writing scripts, the manual process must be decomposed into its natural flow: triggers, data transformations, decisions, and outcomes.
+          {isRTL
+            ? "قبل إعداد العقد أو كتابة الأكواد، يجب تفكيك العملية اليدوية إلى مسارها الطبيعي: نقاط البداية، وتحويلات البيانات، والقرارات، والنتائج النهائية."
+            : "Before configuring nodes or writing scripts, the manual process must be decomposed into its natural flow: triggers, data transformations, decisions, and outcomes."}
         </p>
       </div>
 
