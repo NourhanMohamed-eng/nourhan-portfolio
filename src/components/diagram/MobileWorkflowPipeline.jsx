@@ -29,7 +29,7 @@ const ICON_MAP = {
   Zap,
 };
 
-export default function MobileWorkflowPipeline({ system, structure }) {
+export default function MobileWorkflowPipeline({ system, structure, onSelectNode }) {
   if (!system) return null;
 
   const nodes = system.nodes || [];
@@ -54,7 +54,20 @@ export default function MobileWorkflowPipeline({ system, structure }) {
 
         return (
           <React.Fragment key={node.id}>
-            <div className="flex items-center justify-between p-3 rounded-lg bg-[#15171A] border border-[#24272C]">
+            <div
+              role={onSelectNode ? "button" : undefined}
+              tabIndex={onSelectNode ? 0 : undefined}
+              onClick={() => onSelectNode?.(node)}
+              onKeyDown={(e) => {
+                if (onSelectNode && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  onSelectNode(node);
+                }
+              }}
+              className={`flex items-center justify-between p-3 rounded-lg bg-[#15171A] border border-[#24272C] transition-colors ${
+                onSelectNode ? 'cursor-pointer hover:border-[#363A42] hover:bg-[#1B1E22] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]' : ''
+              }`}
+            >
               <div className="flex items-center gap-3 min-w-0">
                 <div
                   className={`w-8 h-8 rounded flex items-center justify-center shrink-0 border ${colorClasses}`}
@@ -92,7 +105,18 @@ export default function MobileWorkflowPipeline({ system, structure }) {
                 {node.subConnections.map((sub) => (
                   <div
                     key={sub.id}
-                    className="flex items-center justify-between p-2 rounded bg-[#121417] border border-[#24272C] text-xs"
+                    role={onSelectNode ? "button" : undefined}
+                    tabIndex={onSelectNode ? 0 : undefined}
+                    onClick={() => onSelectNode?.(sub)}
+                    onKeyDown={(e) => {
+                      if (onSelectNode && (e.key === 'Enter' || e.key === ' ')) {
+                        e.preventDefault();
+                        onSelectNode(sub);
+                      }
+                    }}
+                    className={`flex items-center justify-between p-2 rounded bg-[#121417] border border-[#24272C] text-xs transition-colors ${
+                      onSelectNode ? 'cursor-pointer hover:border-[#A78BFA]/50 hover:bg-[#1A1822] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#A78BFA]' : ''
+                    }`}
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#A78BFA]" />
@@ -137,7 +161,18 @@ export default function MobileWorkflowPipeline({ system, structure }) {
               return (
                 <div
                   key={node.id}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-[#15171A] border border-[#24272C]"
+                  role={onSelectNode ? "button" : undefined}
+                  tabIndex={onSelectNode ? 0 : undefined}
+                  onClick={() => onSelectNode?.(node)}
+                  onKeyDown={(e) => {
+                    if (onSelectNode && (e.key === 'Enter' || e.key === ' ')) {
+                      e.preventDefault();
+                      onSelectNode(node);
+                    }
+                  }}
+                  className={`flex items-center justify-between p-2.5 rounded-lg bg-[#15171A] border border-[#24272C] transition-colors ${
+                    onSelectNode ? 'cursor-pointer hover:border-[#363A42] hover:bg-[#1B1E22] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]' : ''
+                  }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-7 h-7 rounded flex items-center justify-center shrink-0 bg-[#5B9DFF]/10 text-[#5B9DFF] border border-[#5B9DFF]/20">

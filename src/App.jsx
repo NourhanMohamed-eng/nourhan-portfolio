@@ -5,6 +5,7 @@ import HeroSection from './components/hero/HeroSection';
 import SystemsSection from './components/systems/SystemsSection';
 
 const CaseStudyView = lazy(() => import('./components/casestudy/CaseStudyView'));
+const WorkflowExplorer = lazy(() => import('./components/explorer/WorkflowExplorer'));
 
 function CaseStudySkeleton() {
   return (
@@ -12,6 +13,16 @@ function CaseStudySkeleton() {
       <div className="h-6 w-32 bg-[#1E2025] rounded" />
       <div className="h-12 w-2/3 bg-[#15171A] rounded" />
       <div className="h-64 bg-[#121417] rounded-xl border border-[#24272C]" />
+    </div>
+  );
+}
+
+function ExplorerSkeleton() {
+  return (
+    <div className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-6 animate-pulse">
+      <div className="h-6 w-40 bg-[#1E2025] rounded" />
+      <div className="h-10 w-72 bg-[#15171A] rounded" />
+      <div className="h-80 bg-[#121417] rounded-xl border border-[#24272C]" />
     </div>
   );
 }
@@ -62,6 +73,9 @@ export default function App() {
       <main className="relative z-10">
         <HeroSection />
         <SystemsSection onExplore={(id) => navigate(`/systems/${id}`)} />
+        <Suspense fallback={<ExplorerSkeleton />}>
+          <WorkflowExplorer onExploreCaseStudy={(id) => navigate(`/systems/${id}`)} />
+        </Suspense>
         <div id="contact" className="h-4" />
       </main>
     </div>
