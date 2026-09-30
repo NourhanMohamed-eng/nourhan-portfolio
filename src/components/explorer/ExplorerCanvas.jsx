@@ -151,7 +151,7 @@ export default function ExplorerCanvas({
               <g
                 key={edge.id}
                 style={{
-                  opacity: isEdgeDimmed ? 0.15 : 1,
+                  opacity: isEdgeDimmed ? 0.35 : 1,
                   transition: 'opacity 0.25s ease-out',
                 }}
               >
@@ -179,7 +179,7 @@ export default function ExplorerCanvas({
               <g
                 key={edgeId}
                 style={{
-                  opacity: isDimmed ? 0.15 : 1,
+                  opacity: isDimmed ? 0.35 : 1,
                   transition: 'opacity 0.25s ease-out',
                 }}
               >

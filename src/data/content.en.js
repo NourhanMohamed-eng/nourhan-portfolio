@@ -10,7 +10,7 @@ export const siteMeta = {
   headlineMono: "AI AUTOMATION / WORKFLOW DESIGN / SYSTEM INTEGRATION",
   headlineDisplay: "I Turn Repetitive Processes Into Automated Systems.",
   headlineSubtitle:
-    "AI Automation & Workflow Automation with n8n, APIs, LLMs and intelligent workflows.",
+    "AI Automation & Workflow Automation with n8n, APIs, LLMs and structured workflows.",
   footerTagline: "Built around processes, not templates.",
 };
 
@@ -25,28 +25,36 @@ export const navItems = [
 export const socialLinks = [
   {
     name: "LinkedIn",
-    href: "#", // TODO: verify LinkedIn profile URL
-    isPlaceholder: true,
-  },
-  {
-    name: "GitHub",
-    href: "#", // TODO: verify GitHub profile URL
-    isPlaceholder: true,
-  },
-  {
-    name: "Email",
-    href: "mailto:nourhan@example.com?subject=Automation%20Inquiry%20from%20Portfolio", // TODO: verify primary email address
-    isPlaceholder: true,
-  },
-  {
-    name: "Mostaql",
-    href: "#", // TODO: verify Mostaql profile URL
-    isPlaceholder: true,
+    href: "https://www.linkedin.com/in/nourhan-mohamed-ai",
+    isActive: true,
   },
   {
     name: "Khamsat",
-    href: "#", // TODO: verify Khamsat profile URL
-    isPlaceholder: true,
+    href: "https://khamsat.com/user/nourmohamed_23",
+    isActive: true,
+  },
+  {
+    name: "Nafezly",
+    href: "https://nafezly.com/u/Nourhan__Mohamed",
+    isActive: true,
+  },
+  {
+    name: "FreelanceYard",
+    href: "https://freelanceyard.com/ar/freelancers/norhan-mhmd",
+    isActive: true,
+  },
+  {
+    name: "Mostaql",
+    // TODO: enable when approved
+    href: "#",
+    isActive: false,
+    badge: "Pending",
+  },
+  {
+    name: "GitHub",
+    // TODO: add GitHub URL
+    href: "#",
+    isActive: false,
   },
 ];
 
@@ -108,7 +116,7 @@ export const systems = [
         role: "Receives raw payload via POST request upon form submission.",
         purpose: "Entry point that triggers the entire automation cycle.",
         input: "HTTP POST request with form submission JSON",
-        processing: "Listens for incoming webhooks and validates incoming payload structure",
+        processing: "Listens for incoming webhooks and receives the submission payload",
         output: "Raw lead record (name, contact, service requirements)",
         connections: "Direct edge to Format & Clean Data",
       },
@@ -119,11 +127,11 @@ export const systems = [
         subtitle: "manual",
         executionCount: "1 item",
         role: "Extracts and maps the lead fields.",
-        purpose: "Ensures uniform data formatting before CRM and email dissemination.",
-        input: "Raw webhook JSON object",
+        purpose: "Extracts the name, email, phone, and requested service fields.",
+        input: "HTTP POST request payload with lead details",
         processing: "Extracts name, email, phone, and requested service from the request",
-        output: "Structured lead object ready for downstream tools",
-        connections: "Branches concurrently to Telegram, Gmail, and Google Sheets",
+        output: "Extracted fields: name, email, phone, requested service",
+        connections: "Branches to Telegram, Gmail, and Google Sheets",
       },
       {
         id: "s1-node-3",
@@ -457,20 +465,64 @@ export const techStack = {
 };
 
 export const aboutMe = {
+  label: "06 / BEHIND THE WORK",
+  title: "Behind The Work",
   bio: "I am a Computer and Information Sciences student building my skills in AI automation and workflow design. My current focus is creating practical automation systems using n8n, AI, APIs, and connected business tools. I am particularly interested in turning repetitive manual processes into structured, automated workflows.",
   facts: [
-    "B.Sc. Computer and Information Sciences, Egyptian E-Learning University",
+    "B.Sc. Computer and Information Sciences (Egyptian E-Learning University)",
     "DEPI — AI & Advanced Automation with n8n",
-    "Cybersecurity foundation & systems awareness",
-    "Hands-on practical automation implementations",
+    "Background in Cyber Security",
+    "Practical workflow automation projects",
   ],
 };
 
 export const contactInfo = {
+  label: "07 / CONTACT",
   title: "Have a Process Worth Automating?",
   description:
     "Tell me what you currently do manually. I'll help map the process and identify where automation can fit.",
   ctaText: "Start a Conversation",
-  emailSubject: "Automation%20Inquiry%20from%20Portfolio",
-  emailAddress: "nourhan@example.com", // TODO: verify real email address
+  email: "an3005752@gmail.com",
+  mailtoHref: "mailto:an3005752@gmail.com?subject=Automation%20project%20inquiry",
+  primaryLinks: [
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/nourhan-mohamed-ai",
+      ariaLabel: "Nourhan Mohamed on LinkedIn",
+    },
+    {
+      name: "Khamsat",
+      href: "https://khamsat.com/user/nourmohamed_23",
+      ariaLabel: "Nourhan Mohamed on Khamsat",
+    },
+  ],
+  secondaryLinks: [
+    {
+      name: "Nafezly",
+      href: "https://nafezly.com/u/Nourhan__Mohamed",
+      ariaLabel: "Nourhan Mohamed on Nafezly",
+      isActive: true,
+    },
+    {
+      name: "FreelanceYard",
+      href: "https://freelanceyard.com/ar/freelancers/norhan-mhmd",
+      ariaLabel: "Nourhan Mohamed on FreelanceYard",
+      isActive: true,
+    },
+    {
+      name: "Mostaql",
+      // TODO: enable when approved
+      href: null,
+      ariaLabel: "Nourhan Mohamed on Mostaql (Under Review)",
+      isActive: false,
+      badge: "Pending",
+    },
+    {
+      name: "GitHub",
+      // TODO: add GitHub URL
+      href: null,
+      ariaLabel: "Nourhan Mohamed on GitHub (Coming Soon)",
+      isActive: false,
+    },
+  ],
 };

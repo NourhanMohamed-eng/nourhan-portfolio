@@ -40,20 +40,44 @@ export default function NodeInspectorPanel({
 }) {
   const panelRef = useRef(null);
   const closeBtnRef = useRef(null);
+  const triggerElementRef = useRef(null);
 
   useEffect(() => {
-    // Focus close button on mount for accessibility
+    // Save last focused element to restore focus upon close
+    triggerElementRef.current = document.activeElement;
     closeBtnRef.current?.focus();
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         e.preventDefault();
         onClose?.();
+      } else if (e.key === 'Tab') {
+        // Accessible Focus Trap within modal panel
+        if (!panelRef.current) return;
+        const focusable = panelRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      if (triggerElementRef.current && typeof triggerElementRef.current.focus === 'function') {
+        triggerElementRef.current.focus();
+      }
+    };
   }, [onClose]);
 
   if (!node) return null;
@@ -99,7 +123,7 @@ export default function NodeInspectorPanel({
 
             <div className="min-w-0">
               <span className="font-mono text-[10px] text-[#8A8F98] uppercase tracking-wider block">
-                {node.type || 'WORKFLOW NODE'}
+                Node / {node.type || 'WORKFLOW NODE'}
               </span>
               <h3 className="font-mono text-sm font-semibold text-[#E8E6E1] truncate">
                 {node.name || node.nodeName}
@@ -126,7 +150,7 @@ export default function NodeInspectorPanel({
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-5 text-start font-sans">
+        <div className="flex-1 overflow-y-auto p-5 space-y-4 text-start font-sans">
           
           {/* Subtitle / Operation Badge if available */}
           {node.subtitle && (
@@ -138,38 +162,38 @@ export default function NodeInspectorPanel({
 
           {/* 1. Purpose */}
           <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A8F98] block">
-              01 / NODE PURPOSE
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A8F98] block">
+              Purpose
             </span>
             <p className="text-xs sm:text-sm text-[#E8E6E1] leading-relaxed bg-[#15171A] p-3 rounded-lg border border-[#24272C]">
               {node.purpose || node.role || 'Performs automated execution step within the workflow pipeline.'}
             </p>
           </div>
 
-          {/* 2. Input Data */}
+          {/* 2. Input */}
           <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A8F98] block">
-              02 / INPUT CONTRACT
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A8F98] block">
+              Input
             </span>
             <div className="text-xs font-mono text-[#8A8F98] bg-[#0E0F11] p-3 rounded-lg border border-[#1E2025] leading-relaxed break-words">
               {node.input || 'Inbound trigger payload or upstream node execution object'}
             </div>
           </div>
 
-          {/* 3. Processing Logic */}
+          {/* 3. Processing */}
           <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A8F98] block">
-              03 / PROCESSING & EXECUTION
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A8F98] block">
+              Processing
             </span>
             <p className="text-xs text-[#E8E6E1] leading-relaxed bg-[#15171A] p-3 rounded-lg border border-[#24272C]">
               {node.processing || 'Processes input fields according to node configuration parameters.'}
             </p>
           </div>
 
-          {/* 4. Output Data */}
+          {/* 4. Output */}
           <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A8F98] block">
-              04 / OUTPUT PAYLOAD
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A8F98] block">
+              Output
             </span>
             <div className="text-xs font-mono text-[#8A8F98] bg-[#0E0F11] p-3 rounded-lg border border-[#1E2025] leading-relaxed break-words">
               {node.output || 'Standardized output schema passed downstream to subsequent branches'}
@@ -178,12 +202,30 @@ export default function NodeInspectorPanel({
 
           {/* 5. Connections */}
           <div className="space-y-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A8F98] block">
-              05 / CONNECTIONS & ROUTING
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A8F98] block">
+              Connections
             </span>
-            <div className="text-xs font-mono text-[#E8E6E1] bg-[#15171A] p-3 rounded-lg border border-[#24272C] flex items-start gap-2">
-              <ArrowRight className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: accentColor }} />
-              <span>{node.connections || 'Connected within workflow pipeline'}</span>
+            <div className="text-xs font-mono text-[#E8E6E1] bg-[#15171A] p-3 rounded-lg border border-[#24272C] space-y-2">
+              <div className="flex items-start gap-2">
+                <ArrowRight className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: accentColor }} />
+                <span>{node.connections || 'Connected within workflow pipeline'}</span>
+              </div>
+
+              {/* Explicit sub-connections breakdown for AI Agent */}
+              {node.subConnections && (
+                <div className="pt-2 border-t border-[#1E2025] space-y-1.5 ps-1">
+                  <div className="text-[10px] uppercase text-[#A78BFA] tracking-wider font-semibold">
+                    Attached Sub-Resources:
+                  </div>
+                  {node.subConnections.map((sub) => (
+                    <div key={sub.id} className="text-[11px] text-[#8A8F98] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#A78BFA]" />
+                      <span className="text-[#E8E6E1]">{sub.portName}:</span>
+                      <span>{sub.nodeName}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
