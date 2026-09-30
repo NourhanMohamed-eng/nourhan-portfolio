@@ -97,7 +97,7 @@ export default function WorkflowNode({
         </div>
 
         {/* Node Labels */}
-        <div className="flex-1 min-w-0 pr-1">
+        <div className="flex-1 min-w-0 pe-1">
           <div className="font-mono text-[10px] sm:text-[11px] font-medium text-[#E8E6E1] leading-tight break-words">
             {content?.name || node.name || 'Node'}
           </div>

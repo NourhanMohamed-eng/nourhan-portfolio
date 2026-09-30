@@ -54,7 +54,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             onClick={() => onNavigate('/')}
             className="group inline-flex items-center gap-2 text-xs font-mono text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-2.5 -ms-2.5 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
             <span>Back to All Systems</span>
           </button>
 
@@ -323,7 +323,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             onClick={() => onNavigate(`/systems/${prevSystem.id}`)}
             className="w-full sm:w-auto p-4 rounded-lg bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] flex items-center gap-3 text-start transition-all"
           >
-            <ArrowLeft className="w-4 h-4 text-[#8A8F98]" />
+            <ArrowLeft className="w-4 h-4 text-[#8A8F98] rtl:rotate-180" />
             <div>
               <span className="font-mono text-[10px] text-[#5A606A] block uppercase">
                 PREVIOUS WORKFLOW
@@ -355,7 +355,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
                 {nextSystem.title}
               </span>
             </div>
-            <ArrowRight className="w-4 h-4 text-[#8A8F98]" />
+            <ArrowRight className="w-4 h-4 text-[#8A8F98] rtl:rotate-180" />
           </button>
         </nav>
 

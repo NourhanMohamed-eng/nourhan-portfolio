@@ -4,6 +4,10 @@
 @import "@fontsource/geist-sans/600.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 
 @tailwind base;
 @tailwind components;
@@ -59,4 +63,58 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Arabic Typography and RTL overrides */
+[lang="ar"] {
+  font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+}
+
+[lang="ar"] .font-serif {
+  font-family: "IBM Plex Sans Arabic", sans-serif;
+  font-weight: 600;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: 1.35;
+}
+
+[lang="ar"] .font-sans {
+  font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+  letter-spacing: normal !important;
+  line-height: 1.75;
+}
+
+[lang="ar"] .font-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Ensure no uppercase or tracking breaks Arabic cursive connections */
+[lang="ar"] .tracking-wider,
+[lang="ar"] .tracking-widest,
+[lang="ar"] .tracking-normal,
+[lang="ar"] .uppercase {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* Latin badges/terms can still retain uppercase and tracking if explicitly marked dir="ltr" */
+[lang="ar"] [dir="ltr"] .tracking-wider,
+[lang="ar"] [dir="ltr"] .tracking-widest,
+[lang="ar"] [dir="ltr"].uppercase,
+[lang="ar"] bdi.uppercase {
+  text-transform: uppercase;
+}
+
+/* Directional flipping for navigation arrows in RTL */
+[dir="rtl"] .rtl\:rotate-180 {
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .rtl\:scale-x-\[-1\] {
+  transform: scaleX(-1);
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }

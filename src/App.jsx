@@ -1,4 +1,5 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Navbar from './components/layout/Navbar';
 import ExecutionLine from './components/layout/ExecutionLine';
 import HeroSection from './components/hero/HeroSection';
@@ -33,30 +34,8 @@ function ExplorerSkeleton() {
   );
 }
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-
-  // Sync route on browser back/forward buttons
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname);
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-
-  const navigate = (path) => {
-    if (path !== window.location.pathname) {
-      window.history.pushState({}, '', path);
-      setCurrentPath(path);
-    }
-  };
-
-  // Route: /systems/:id
-  const isCaseStudy = currentPath.startsWith('/systems/');
-  const activeSystemId = isCaseStudy
-    ? currentPath.replace('/systems/', '').replace(/\/$/, '')
-    : null;
+function MainPortfolio() {
+  const { lang, isCaseStudy, activeSystemId, navigate } = useLanguage();
 
   if (isCaseStudy && activeSystemId) {
     return (
@@ -66,7 +45,7 @@ export default function App() {
     );
   }
 
-  // Route: / (Main Home Page)
+  // Route: / or /ar (Main Home Page)
   return (
     <div className="min-h-screen bg-[#0E0F11] text-[#E8E6E1] bg-canvas-dots relative selection:bg-[#3DDC97]/20 selection:text-[#3DDC97]">
       {/* Skip to Content Link for Keyboard Accessibility */}
@@ -74,7 +53,7 @@ export default function App() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#3DDC97] focus:text-[#0E0F11] focus:font-mono focus:text-xs focus:font-semibold focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3DDC97]"
       >
-        Skip to content
+        {lang === 'ar' ? 'الانتقال إلى المحتوى الرئيسي' : 'Skip to content'}
       </a>
 
       {/* Dynamic execution line along the margin */}
@@ -99,5 +78,13 @@ export default function App() {
       {/* Site Footer */}
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainPortfolio />
+    </LanguageProvider>
   );
 }
