@@ -49,31 +49,61 @@ const ACCENT_COLORS = {
 };
 
 export default function HeroWorkflow() {
-  const [activeStep, setActiveStep] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    return false;
+  });
+  const [activeStep, setActiveStep] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return heroWorkflow.nodes.length;
+    }
+    return 0;
+  });
   const [isPaused, setIsPaused] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
     // Detect reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotion = (e) => {
+      setPrefersReducedMotion(e.matches);
+      if (e.matches) {
+        setActiveStep(heroWorkflow.nodes.length);
+      }
+    };
     setPrefersReducedMotion(mediaQuery.matches);
+    if (mediaQuery.matches) {
+      setActiveStep(heroWorkflow.nodes.length);
+    }
 
-    const handleChange = (e) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    mediaQuery.addEventListener('change', updateMotion);
+    return () => mediaQuery.removeEventListener('change', updateMotion);
   }, []);
 
-  // Sequential execution loop
+  // Sequential execution: runs through nodes and finishes at EXECUTED ✓
   useEffect(() => {
     if (prefersReducedMotion || isPaused) return;
 
+    // If already executed, don't run timer
+    if (activeStep >= heroWorkflow.nodes.length) return;
+
     const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % (heroWorkflow.nodes.length + 1));
-    }, 950);
+      setActiveStep((prev) => {
+        const next = prev + 1;
+        if (next >= heroWorkflow.nodes.length) {
+          clearInterval(interval);
+          return heroWorkflow.nodes.length;
+        }
+        return next;
+      });
+    }, 850);
 
     return () => clearInterval(interval);
-  }, [prefersReducedMotion, isPaused]);
+  }, [prefersReducedMotion, isPaused, activeStep]);
+
+  const isComplete = prefersReducedMotion || activeStep >= heroWorkflow.nodes.length;
 
   return (
     <div
@@ -98,7 +128,7 @@ export default function HeroWorkflow() {
             STATUS:
           </span>
           <span className="font-mono text-[9px] sm:text-[10px] text-[#3DDC97] px-2 py-0.5 rounded bg-[#3DDC97]/10 border border-[#3DDC97]/20 whitespace-nowrap">
-            {prefersReducedMotion || activeStep === heroWorkflow.nodes.length ? 'EXECUTED ✓' : 'PROCESSING...'}
+            {isComplete ? 'EXECUTED ✓' : 'PROCESSING...'}
           </span>
         </div>
       </div>
@@ -228,7 +258,7 @@ export default function HeroWorkflow() {
 
       {/* Interactive Micro Affordance */}
       <div className="mt-4 pt-3 border-t border-[#1E2025] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 text-[9px] sm:text-[10px] font-mono text-[#5A606A]">
-        <span>AUTOMATED EXECUTION LOOP</span>
+        <span>AUTOMATED EXECUTION PIPELINE</span>
         <span>HOVER TO INSPECT STATE</span>
       </div>
     </div>

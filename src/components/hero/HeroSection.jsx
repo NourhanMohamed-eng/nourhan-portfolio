@@ -46,7 +46,7 @@ export default function HeroSection() {
                 <span className="text-[#E8E6E1]">n8n / APIs</span>
               </div>
               <div className="flex justify-between text-[#8A8F98]">
-                <span>INTELLIGENCE:</span>
+                <span>AI MODELS:</span>
                 <span className="text-[#A78BFA]">LLMs / Gemini</span>
               </div>
               <div className="flex justify-between text-[#8A8F98]">

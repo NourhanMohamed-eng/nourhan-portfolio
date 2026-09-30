@@ -52,9 +52,8 @@ export const socialLinks = [
   },
   {
     name: "GitHub",
-    // TODO: add GitHub URL
-    href: "#",
-    isActive: false,
+    href: "https://github.com/NourhanMohamed-eng",
+    isActive: true,
   },
 ];
 

@@ -69,7 +69,7 @@ export default function Navbar() {
               href="#contact"
               className="group inline-flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] text-xs font-mono transition-all duration-200"
             >
-              <span>Let's Build One</span>
+              <span>Contact</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
@@ -120,7 +120,7 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 w-full min-h-[44px] py-3 rounded bg-[#3DDC97] text-[#0E0F11] text-xs font-mono font-medium"
             >
-              <span>Start an Automation Project</span>
+              <span>Contact</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
