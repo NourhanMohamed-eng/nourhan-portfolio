@@ -4,6 +4,12 @@ import ExecutionLine from './components/layout/ExecutionLine';
 import HeroSection from './components/hero/HeroSection';
 import SystemsSection from './components/systems/SystemsSection';
 
+import AutomationTimeline from './components/approach/AutomationTimeline';
+import StackSection from './components/stack/StackSection';
+import AboutSection from './components/about/AboutSection';
+import ContactSection from './components/contact/ContactSection';
+import Footer from './components/layout/Footer';
+
 const CaseStudyView = lazy(() => import('./components/casestudy/CaseStudyView'));
 const WorkflowExplorer = lazy(() => import('./components/explorer/WorkflowExplorer'));
 
@@ -76,8 +82,14 @@ export default function App() {
         <Suspense fallback={<ExplorerSkeleton />}>
           <WorkflowExplorer onExploreCaseStudy={(id) => navigate(`/systems/${id}`)} />
         </Suspense>
-        <div id="contact" className="h-4" />
+        <AutomationTimeline />
+        <StackSection />
+        <AboutSection />
+        <ContactSection />
       </main>
+
+      {/* Site Footer */}
+      <Footer />
     </div>
   );
 }
