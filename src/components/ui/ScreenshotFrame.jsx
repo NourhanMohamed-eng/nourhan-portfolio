@@ -16,20 +16,20 @@ export default function ScreenshotFrame({
       <div className="w-full bg-[#121417] border border-[#24272C] rounded-xl overflow-hidden shadow-2xl transition-all duration-300 hover:border-[#363A42]">
         
         {/* Frame Top Header (Browser / Workspace bar) */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#15171A] border-b border-[#24272C] select-none">
+        <div className="flex items-center justify-between gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-[#15171A] border-b border-[#24272C] select-none min-w-0">
           {/* Left: Window Dots & Title */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5" aria-hidden="true">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="flex items-center gap-1.5 shrink-0" aria-hidden="true">
               <span className="w-2.5 h-2.5 rounded-full bg-[#24272C] border border-[#363A42]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#24272C] border border-[#363A42]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#24272C] border border-[#363A42]" />
             </div>
 
-            <div className="h-3 w-[1px] bg-[#24272C]" />
+            <div className="h-3 w-[1px] bg-[#24272C] shrink-0" />
 
-            <div className="flex items-center gap-2 font-mono text-xs text-[#8A8F98]">
-              <span className="text-[#5A606A]">Personal /</span>
-              <span className="text-[#E8E6E1] font-medium truncate max-w-[200px] sm:max-w-none">
+            <div className="flex items-center gap-1.5 font-mono text-xs text-[#8A8F98] min-w-0">
+              <span className="text-[#5A606A] hidden sm:inline shrink-0">Personal /</span>
+              <span className="text-[#E8E6E1] font-medium truncate">
                 {title}
               </span>
             </div>
@@ -39,8 +39,9 @@ export default function ScreenshotFrame({
           <button
             type="button"
             onClick={() => setLightboxOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1B1E22] hover:bg-[#24272C] text-[#8A8F98] hover:text-[#E8E6E1] border border-[#24272C] text-[11px] font-mono transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 rounded bg-[#1B1E22] hover:bg-[#24272C] text-[#8A8F98] hover:text-[#E8E6E1] border border-[#24272C] text-[11px] font-mono transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97] shrink-0 min-w-[44px] min-h-[44px]"
             title="Click to view full uncropped resolution in Lightbox"
+            aria-label="Expand Canvas in Lightbox"
           >
             <ZoomIn className="w-3.5 h-3.5 text-[#3DDC97]" />
             <span className="hidden sm:inline">Expand Canvas</span>

@@ -208,7 +208,7 @@ export default function WorkflowStrip({
               <button
                 type="button"
                 onClick={() => onExplore?.(system.id)}
-                className="group inline-flex items-center gap-2 px-4 py-2.5 rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] font-mono text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
+                className="group inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] font-mono text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
               >
                 <span>Explore Workflow</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

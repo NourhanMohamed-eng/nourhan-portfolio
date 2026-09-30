@@ -97,19 +97,19 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.ariaLabel}
-                    className="text-[#8A8F98] hover:text-[#E8E6E1] transition-colors underline-offset-4 hover:underline"
+                    className="text-[#8A8F98] hover:text-[#E8E6E1] transition-colors underline-offset-4 hover:underline py-2.5 px-1 min-h-[44px] inline-flex items-center"
                   >
                     {item.name}
                   </a>
                 );
               }
 
-              // Disabled link (Mostaql under review, GitHub coming soon)
+              // Disabled link (Mostaql under review)
               return (
                 <span
                   key={item.name}
                   aria-disabled="true"
-                  className="text-[#4A4E57] cursor-not-allowed select-none inline-flex items-center gap-1"
+                  className="text-[#4A4E57] cursor-not-allowed select-none inline-flex items-center gap-1 py-2.5 px-1 min-h-[44px]"
                   title={item.ariaLabel}
                 >
                   <span>{item.name}</span>

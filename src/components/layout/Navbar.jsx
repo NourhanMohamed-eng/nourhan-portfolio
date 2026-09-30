@@ -28,7 +28,7 @@ export default function Navbar() {
           {/* Brand & Subtitle */}
           <a
             href="#"
-            className="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2.5 focus-visible:outline-none"
+            className="group flex flex-col sm:flex-row sm:items-baseline justify-center min-h-[44px] gap-0.5 sm:gap-2.5 focus-visible:outline-none"
             aria-label="Nourhan Mohamed Home"
           >
             <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-[#E8E6E1] group-hover:text-[#3DDC97] transition-colors">
@@ -40,12 +40,12 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7" aria-label="Primary Navigation">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-7" aria-label="Primary Navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className="font-mono text-xs uppercase tracking-wider text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+                className="font-mono text-xs uppercase tracking-wider text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-1 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
               >
                 {item.label}
               </a>
@@ -53,9 +53,9 @@ export default function Navbar() {
           </nav>
 
           {/* Availability Status Badge & Primary CTA */}
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
             <div
-              className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#15171A] border border-[#24272C] text-[11px] font-mono text-[#8A8F98]"
+              className="hidden lg:inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#15171A] border border-[#24272C] text-[11px] font-mono text-[#8A8F98]"
               title="Current availability status"
             >
               <span className="relative flex h-2 w-2">
@@ -67,7 +67,7 @@ export default function Navbar() {
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] text-xs font-mono transition-all duration-200"
+              className="group inline-flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] text-xs font-mono transition-all duration-200"
             >
               <span>Let's Build One</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -79,7 +79,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#8A8F98] hover:text-[#E8E6E1] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+              className="w-11 h-11 inline-flex items-center justify-center text-[#8A8F98] hover:text-[#E8E6E1] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               aria-expanded={mobileMenuOpen}
             >
@@ -101,13 +101,13 @@ export default function Navbar() {
             <span className="text-xs font-mono text-[#8A8F98]">{siteMeta.status}</span>
           </div>
 
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-2">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-mono text-sm uppercase tracking-wider text-[#8A8F98] hover:text-[#3DDC97] py-1 transition-colors"
+                className="font-mono text-sm uppercase tracking-wider text-[#8A8F98] hover:text-[#3DDC97] min-h-[44px] flex items-center transition-colors"
               >
                 {item.label}
               </a>
@@ -118,7 +118,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded bg-[#3DDC97] text-[#0E0F11] text-xs font-mono font-medium"
+              className="flex items-center justify-center gap-2 w-full min-h-[44px] py-3 rounded bg-[#3DDC97] text-[#0E0F11] text-xs font-mono font-medium"
             >
               <span>Start an Automation Project</span>
               <ArrowUpRight className="w-4 h-4" />

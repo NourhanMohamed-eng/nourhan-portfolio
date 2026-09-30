@@ -45,7 +45,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="group inline-flex items-center gap-2 text-xs font-mono text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+            className="group inline-flex items-center gap-2 text-xs font-mono text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-2.5 -ms-2.5 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to All Systems</span>
@@ -330,7 +330,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="font-mono text-xs text-[#8A8F98] hover:text-[#3DDC97] transition-colors py-2 px-3"
+            className="font-mono text-xs text-[#8A8F98] hover:text-[#3DDC97] transition-colors py-2 px-3 min-h-[44px] inline-flex items-center justify-center rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           >
             View All Systems
           </button>

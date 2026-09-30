@@ -62,7 +62,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-12 sm:mb-16 max-w-md sm:max-w-none">
           <a
             href="#systems"
-            className="group inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded bg-[#3DDC97] text-[#0E0F11] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#34c788] transition-all shadow-lg shadow-[#3DDC97]/15"
+            className="group inline-flex items-center justify-center gap-2.5 px-5 py-3.5 min-h-[44px] rounded bg-[#3DDC97] text-[#0E0F11] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#34c788] transition-all shadow-lg shadow-[#3DDC97]/15"
           >
             <Play className="w-3.5 h-3.5 fill-current transition-transform group-hover:translate-x-0.5" />
             <span>Explore the Systems</span>
@@ -71,7 +71,7 @@ export default function HeroSection() {
 
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded bg-[#15171A] hover:bg-[#1B1E22] text-[#E8E6E1] border border-[#24272C] hover:border-[#363A42] font-mono text-xs uppercase tracking-wider transition-all"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3.5 min-h-[44px] rounded bg-[#15171A] hover:bg-[#1B1E22] text-[#E8E6E1] border border-[#24272C] hover:border-[#363A42] font-mono text-xs uppercase tracking-wider transition-all"
           >
             <span>Let's Build One</span>
           </a>

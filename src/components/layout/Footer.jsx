@@ -30,7 +30,7 @@ export default function Footer() {
             <a
               key={item.id}
               href={item.href}
-              className="hover:text-[#E8E6E1] transition-colors"
+              className="hover:text-[#E8E6E1] transition-colors py-2.5 px-1 min-h-[44px] inline-flex items-center"
             >
               {item.label}
             </a>
@@ -41,7 +41,7 @@ export default function Footer() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="inline-flex items-center gap-1.5 text-[#5A606A] hover:text-[#E8E6E1] transition-colors py-1 px-2 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+          className="inline-flex items-center gap-1.5 text-[#5A606A] hover:text-[#E8E6E1] transition-colors py-2.5 px-3 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
           aria-label="Back to top of page"
         >
           <span>Top</span>
