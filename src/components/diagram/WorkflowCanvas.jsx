@@ -184,7 +184,6 @@ export default function WorkflowCanvas({
           <span className="w-1.5 h-1.5 rounded-full bg-[#3DDC97]" />
           <span>STATUS: EXECUTED ✓</span>
         </div>
-        <span className="hidden sm:inline">N8N SVG CANVAS ENGINE</span>
       </div>
     </div>
   );

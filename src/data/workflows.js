@@ -18,7 +18,6 @@ export const WORKFLOW_STRUCTURES = {
         icon: 'Webhook',
         accent: 'orange',
         isTrigger: true,
-        outputPortLabel: '-POST-',
       },
       {
         id: 's1-node-2',
@@ -62,7 +61,6 @@ export const WORKFLOW_STRUCTURES = {
         id: 'e1-1-2',
         from: 's1-node-1',
         to: 's1-node-2',
-        label: '-POST-',
         badge: '1 item',
         type: 'standard',
       },

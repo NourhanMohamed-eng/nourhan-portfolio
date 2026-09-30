@@ -86,7 +86,6 @@ export default function ScreenshotFrame({
             <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
             <span>REAL N8N WORKSPACE CAPTURE</span>
           </div>
-          <span>RESOLUTION: 1660 × 915px</span>
         </div>
       </div>
 
