@@ -519,10 +519,9 @@ export const contactInfo = {
     },
     {
       name: "GitHub",
-      // TODO: add GitHub URL
-      href: null,
-      ariaLabel: "Nourhan Mohamed on GitHub (Coming Soon)",
-      isActive: false,
+      href: "https://github.com/NourhanMohamed-eng",
+      ariaLabel: "Nourhan Mohamed on GitHub",
+      isActive: true,
     },
   ],
 };
