@@ -78,6 +78,7 @@ export const systems = [
     id: "system-01",
     monoTag: "WORKFLOW 01 / LEAD MANAGEMENT",
     title: "استقبال طلبات العملاء والتنبيهات المؤتمتة",
+    shortTitle: "استقبال الطلبات",
     summary:
       "سير عمل يستقبل بيانات العملاء عبر Webhook، ويستخرج الحقول المطلوبة، ثم يرسلها إلى Telegram وGmail وGoogle Sheets.",
     problem:
@@ -181,6 +182,7 @@ export const systems = [
     id: "system-02",
     monoTag: "WORKFLOW 02 / AI AGENT",
     title: "وكيل ذكاء اصطناعي لدعم العملاء",
+    shortTitle: "وكيل دعم العملاء",
     summary:
       "سير عمل لوكيل ذكاء اصطناعي يجيب على رسائل Telegram باستخدام نموذج محادثة Google Gemini وذاكرة للحوار وقاعدة معرفة على Google Sheets.",
     problem:
@@ -310,6 +312,7 @@ export const systems = [
     id: "system-03",
     monoTag: "WORKFLOW 03 / REPORTING & MONITORING",
     title: "التقارير اليومية المؤتمتة والتنبيهات الإدارية",
+    shortTitle: "التقارير اليومية",
     summary:
       "سير عمل مجدول يعمل يوميًا عند الساعة 9:00 صباحًا، يقرأ بيانات العمليات من Google Sheets، ويحسب مؤشرات الأداء (KPIs) في عقدة Code، ثم يرسل الملخص عبر Telegram وGmail.",
     problem:

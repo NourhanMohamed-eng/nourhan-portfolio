@@ -54,16 +54,16 @@ export default function CaseStudyView({ systemId, onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="group inline-flex items-center gap-2 text-xs font-mono text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-2.5 -ms-2.5 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+            className={`group inline-flex items-center gap-2 text-xs ${isRTL ? 'font-sans font-medium' : 'font-mono'} text-[#8A8F98] hover:text-[#E8E6E1] transition-colors py-2 px-2.5 -ms-2.5 min-h-[44px] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]`}
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 rtl:rotate-180 rtl:group-hover:translate-x-1" />
             <span>{isRTL ? "العودة إلى جميع الأنظمة" : "Back to All Systems"}</span>
           </button>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-[#5A606A]">
+          <div className={`flex items-center gap-2 text-xs ${isRTL ? 'font-sans' : 'font-mono'} text-[#5A606A]`}>
             <span>{isRTL ? `نظام ${currentIndex + 1} من 3` : `SYSTEM ${currentIndex + 1} OF 3`}</span>
             <span className="hidden sm:inline">/</span>
-            <span className="text-[#3DDC97] hidden sm:inline">VERIFIED N8N</span>
+            <span className="text-[#3DDC97] font-mono hidden sm:inline">VERIFIED N8N</span>
           </div>
         </div>
       </header>
@@ -347,7 +347,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="font-mono text-xs text-[#8A8F98] hover:text-[#3DDC97] transition-colors py-2 px-3 min-h-[44px] inline-flex items-center justify-center rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+            className={`${isRTL ? 'font-sans text-sm font-medium' : 'font-mono text-xs'} text-[#8A8F98] hover:text-[#3DDC97] transition-colors py-2 px-3 min-h-[44px] inline-flex items-center justify-center rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]`}
           >
             <span>{isRTL ? "عرض كل الأنظمة" : "View All Systems"}</span>
           </button>

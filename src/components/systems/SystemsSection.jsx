@@ -37,9 +37,9 @@ export default function SystemsSection({ onExplore }) {
             </h2>
           </div>
 
-          <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-md italic">
+          <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-md">
             {isRTL
-              ? "ثلاث مشكلات مختلفة. ثلاث معماريات أتمتة مختلفة."
+              ? "ثلاث مشكلات، وثلاثة تصاميم أتمتة مختلفة."
               : "Three different problems. Three different automation architectures."}
           </p>
         </div>

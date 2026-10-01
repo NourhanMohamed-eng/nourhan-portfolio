@@ -11,14 +11,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-[#24272C] bg-[#0E0F11] py-12 px-4 sm:px-6 lg:px-8 text-xs font-mono">
+    <footer className={`border-t border-[#24272C] bg-[#0E0F11] py-12 px-4 sm:px-6 lg:px-8 text-xs ${isRTL ? 'font-sans' : 'font-mono'}`}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Brand & Editorial Line */}
         <div className="space-y-1 text-center md:text-start">
           <div className="flex items-center justify-center md:justify-start gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#3DDC97]" />
-            <span className="font-semibold text-[#E8E6E1] tracking-wider uppercase">
+            <span className="font-mono font-semibold text-[#E8E6E1] tracking-wider uppercase">
               NOURHAN MOHAMED
             </span>
           </div>

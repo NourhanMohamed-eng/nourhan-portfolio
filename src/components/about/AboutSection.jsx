@@ -54,7 +54,7 @@ export default function AboutSection() {
                   <div className="w-8 h-8 rounded-lg bg-[#121417] border border-[#24272C] flex items-center justify-center text-[#3DDC97] shrink-0">
                     <Icon className="w-4 h-4" />
                   </div>
-                  <span className="font-mono text-xs sm:text-sm text-[#E8E6E1] leading-relaxed">
+                  <span className={`${isRTL ? 'font-sans' : 'font-mono'} text-xs sm:text-sm text-[#E8E6E1] leading-relaxed`}>
                     {fact}
                   </span>
                 </div>

@@ -68,6 +68,7 @@
 /* Arabic Typography and RTL overrides */
 [lang="ar"] {
   font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+  letter-spacing: normal;
 }
 
 [lang="ar"] .font-serif {
@@ -75,32 +76,74 @@
   font-weight: 600;
   letter-spacing: normal !important;
   text-transform: none !important;
+  font-style: normal !important;
   line-height: 1.35;
 }
 
 [lang="ar"] .font-sans {
   font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
   letter-spacing: normal !important;
+  text-transform: none !important;
+  font-style: normal !important;
   line-height: 1.75;
 }
 
-[lang="ar"] .font-mono {
+/* In Arabic context, buttons, tabs, links and form controls use IBM Plex Sans Arabic */
+[lang="ar"] button,
+[lang="ar"] a,
+[lang="ar"] [role="tab"],
+[lang="ar"] input,
+[lang="ar"] textarea,
+[lang="ar"] select {
+  font-family: "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  font-style: normal !important;
+}
+
+/* Pure Latin mono labels (spans/divs) and code retain JetBrains Mono */
+[lang="ar"] .font-mono:not(button):not(a):not([role="tab"]),
+[lang="ar"] [dir="ltr"].font-mono,
+[lang="ar"] [dir="ltr"] .font-mono,
+[lang="ar"] bdi.font-mono,
+[lang="ar"] code,
+[lang="ar"] kbd {
   font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Remove italics from Arabic text */
+[lang="ar"] i,
+[lang="ar"] em,
+[lang="ar"] .italic {
+  font-style: normal !important;
 }
 
 /* Ensure no uppercase or tracking breaks Arabic cursive connections */
 [lang="ar"] .tracking-wider,
 [lang="ar"] .tracking-widest,
 [lang="ar"] .tracking-normal,
+[lang="ar"] .tracking-tight,
+[lang="ar"] .tracking-tighter,
 [lang="ar"] .uppercase {
   letter-spacing: normal;
   text-transform: none;
 }
 
 /* Latin badges/terms can still retain uppercase and tracking if explicitly marked dir="ltr" */
+[lang="ar"] [dir="ltr"].tracking-wider,
 [lang="ar"] [dir="ltr"] .tracking-wider,
+[lang="ar"] bdi.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+[lang="ar"] [dir="ltr"].tracking-widest,
 [lang="ar"] [dir="ltr"] .tracking-widest,
+[lang="ar"] bdi.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
 [lang="ar"] [dir="ltr"].uppercase,
+[lang="ar"] [dir="ltr"] .uppercase,
 [lang="ar"] bdi.uppercase {
   text-transform: uppercase;
 }

@@ -76,6 +76,7 @@ export const systems = [
     id: "system-01",
     monoTag: "WORKFLOW 01 / LEAD MANAGEMENT",
     title: "Lead Capture & Notifications",
+    shortTitle: "Lead Capture",
     summary:
       "A workflow that receives lead submissions through a webhook, extracts the lead fields, and sends them to Telegram, Gmail, and Google Sheets.",
     problem:
@@ -179,6 +180,7 @@ export const systems = [
     id: "system-02",
     monoTag: "WORKFLOW 02 / AI AGENT",
     title: "AI Customer Support Agent",
+    shortTitle: "Customer Support Agent",
     summary:
       "An AI agent workflow that replies to Telegram messages using a Google Gemini chat model, conversation memory, and a Google Sheets knowledge base.",
     problem:
@@ -308,6 +310,7 @@ export const systems = [
     id: "system-03",
     monoTag: "WORKFLOW 03 / REPORTING & MONITORING",
     title: "Automated Daily Reporting & Alerting",
+    shortTitle: "Daily Reports",
     summary:
       "A scheduled workflow that runs every day at 9 AM, reads operations data from Google Sheets, calculates KPI metrics in a Code node, and sends the summary through Telegram and Gmail.",
     problem:

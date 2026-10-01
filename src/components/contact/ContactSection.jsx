@@ -46,7 +46,9 @@ export default function ContactSection() {
             <a
               href={contactInfo.mailtoHref}
               aria-label={isRTL ? "إرسال بريد إلكتروني إلى نورهان محمد لبدء محادثة" : "Send an email to Nourhan Mohamed to start a conversation"}
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#3DDC97] hover:bg-[#4AE3A2] text-[#0E0F11] font-mono text-sm font-semibold transition-all duration-200 shadow-lg shadow-[#3DDC97]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0F11]"
+              className={`inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#3DDC97] hover:bg-[#4AE3A2] text-[#0E0F11] ${
+                isRTL ? 'font-sans font-semibold text-base' : 'font-mono text-sm font-semibold'
+              } transition-all duration-200 shadow-lg shadow-[#3DDC97]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0F11]`}
             >
               <Mail className="w-4 h-4 stroke-[2.5]" />
               <span>{contactInfo.ctaText}</span>
@@ -59,7 +61,9 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={contactInfo.primaryLinks[0].ariaLabel}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#363A42] text-[#E8E6E1] font-mono text-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+              className={`inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#363A42] text-[#E8E6E1] ${
+                isRTL ? 'font-sans text-sm font-medium' : 'font-mono text-sm'
+              } transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]`}
             >
               <span>{contactInfo.primaryLinks[0].name}</span>
               <ArrowUpRight className="w-4 h-4 text-[#8A8F98]" />
@@ -71,7 +75,9 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={contactInfo.primaryLinks[1].ariaLabel}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#363A42] text-[#E8E6E1] font-mono text-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
+              className={`inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#363A42] text-[#E8E6E1] ${
+                isRTL ? 'font-sans text-sm font-medium' : 'font-mono text-sm'
+              } transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]`}
             >
               <span>{contactInfo.primaryLinks[1].name}</span>
               <ArrowUpRight className="w-4 h-4 text-[#8A8F98]" />
@@ -80,14 +86,14 @@ export default function ContactSection() {
 
           {/* Email address display (shown as visible text once only) */}
           <div className="pt-2">
-            <span className="font-mono text-xs text-[#8A8F98]">
-              {isRTL ? "البريد المباشر: " : "Direct inbox: "}<span className="text-[#E8E6E1]">{contactInfo.email}</span>
+            <span className={`text-xs text-[#8A8F98] ${isRTL ? 'font-sans' : 'font-mono'}`}>
+              {isRTL ? "البريد المباشر: " : "Direct inbox: "}<span className="text-[#E8E6E1] font-mono" dir="ltr">{contactInfo.email}</span>
             </span>
           </div>
 
           {/* Secondary Links: Plain small text, no logos or badges */}
-          <div className="pt-6 border-t border-[#1E2025] flex flex-wrap items-center gap-4 text-xs font-mono">
-            <span className="text-[#8A8F98] uppercase tracking-wider text-[10px]">
+          <div className={`pt-6 border-t border-[#1E2025] flex flex-wrap items-center gap-4 text-xs ${isRTL ? 'font-sans' : 'font-mono'}`}>
+            <span className={`text-[#8A8F98] ${isRTL ? 'text-xs font-medium' : 'uppercase tracking-wider text-[10px]'}`}>
               {isRTL ? "منصات أخرى:" : "Other Profiles:"}
             </span>
 

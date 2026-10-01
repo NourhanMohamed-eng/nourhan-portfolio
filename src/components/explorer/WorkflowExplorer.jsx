@@ -56,7 +56,7 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
           <button
             type="button"
             onClick={() => onExploreCaseStudy(activeSystem.id)}
-            className="self-start md:self-end inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#3DDC97]/40 text-xs font-mono text-[#E8E6E1] transition-all group"
+            className={`self-start md:self-end inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-lg bg-[#15171A] hover:bg-[#1B1E22] border border-[#24272C] hover:border-[#3DDC97]/40 text-xs ${isRTL ? 'font-sans font-medium' : 'font-mono'} text-[#E8E6E1] transition-all group`}
           >
             <span>{isRTL ? "دراسة الحالة الكاملة" : "Full Case Study"}</span>
             <ExternalLink className="w-3.5 h-3.5 text-[#3DDC97] group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-transform" />
@@ -68,7 +68,7 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
       <div
         role="tablist"
         aria-label={isRTL ? "اختيار سير العمل للمعاينة" : "Select workflow to inspect"}
-        className="flex items-center gap-2 p-1.5 rounded-xl bg-[#121417] border border-[#24272C] mb-6 overflow-x-auto scrollbar-none max-w-full"
+        className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1.5 rounded-xl bg-[#121417] border border-[#24272C] mb-6 w-full"
       >
         {systems.map((sys, idx) => {
           const isActive = sys.id === activeSystemId;
@@ -83,21 +83,23 @@ export default function WorkflowExplorer({ onExploreCaseStudy }) {
               aria-controls={`panel-${sys.id}`}
               id={`tab-${sys.id}`}
               onClick={() => handleTabChange(sys.id)}
-              className={`flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 min-h-[44px] rounded-lg text-xs font-mono transition-all duration-200 shrink-0 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97] ${
+              className={`flex items-center justify-center sm:justify-start gap-2.5 px-3.5 sm:px-4 py-2.5 min-h-[44px] rounded-lg text-xs ${
+                isRTL ? 'font-sans font-medium' : 'font-mono'
+              } transition-all duration-200 w-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97] ${
                 isActive
                   ? 'bg-[#1A1D21] text-[#E8E6E1] border border-[#2E333B] shadow-md'
                   : 'text-[#8A8F98] hover:text-[#E8E6E1] hover:bg-[#15171A] border border-transparent'
               }`}
             >
               <span
-                className="w-1.5 h-1.5 rounded-full transition-transform"
+                className="w-1.5 h-1.5 rounded-full transition-transform shrink-0"
                 style={{
                   backgroundColor: isActive ? tabAccent : '#363A42',
                   transform: isActive ? 'scale(1.25)' : 'scale(1)',
                 }}
               />
-              <span className="text-[#5A606A] hidden sm:inline">0{idx + 1} /</span>
-              <span>{sys.title}</span>
+              <span className="text-[#5A606A] font-mono shrink-0">0{idx + 1} /</span>
+              <span className="truncate">{sys.shortTitle || sys.title}</span>
             </button>
           );
         })}

@@ -242,7 +242,9 @@ export default function NodeInspectorPanel({
             <button
               type="button"
               onClick={() => onExploreCaseStudy(system.id)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1E2025] hover:bg-[#282C34] text-xs font-mono text-[#3DDC97] border border-[#3DDC97]/30 hover:border-[#3DDC97] transition-all"
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-lg bg-[#1E2025] hover:bg-[#282C34] text-xs ${
+                isRTL ? 'font-sans font-medium' : 'font-mono'
+              } text-[#3DDC97] border border-[#3DDC97]/30 hover:border-[#3DDC97] transition-all`}
             >
               <span>{isRTL ? "استكشف دراسة الحالة" : "Explore Case Study"}</span>
               <ExternalLink className="w-3 h-3" />

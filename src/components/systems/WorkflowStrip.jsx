@@ -201,7 +201,7 @@ export default function WorkflowStrip({
           <div className="pt-4 border-t border-[#24272C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
-              <span className="font-mono text-xs text-[#8A8F98]">
+              <span className={`text-xs text-[#8A8F98] ${isRTL ? 'font-sans' : 'font-mono'}`}>
                 {isRTL
                   ? 'لقطة حقيقية من سير العمل في n8n'
                   : 'Real verified workflow implementation from n8n'}
@@ -212,7 +212,9 @@ export default function WorkflowStrip({
               <button
                 type="button"
                 onClick={() => onExplore?.(system.id)}
-                className="group inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] font-mono text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
+                className={`group inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded bg-[#1F2329] hover:bg-[#3DDC97] text-[#E8E6E1] hover:text-[#0E0F11] border border-[#24272C] hover:border-[#3DDC97] ${
+                  isRTL ? 'font-sans text-sm font-medium' : 'font-mono text-xs font-medium'
+                } transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]`}
               >
                 <span>{isRTL ? 'استكشف سير العمل' : 'Explore Workflow'}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
