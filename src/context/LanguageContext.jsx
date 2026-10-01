@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import * as contentEn from '../data/content.en';
 import * as contentAr from '../data/content.ar';
+import { updateSeo } from '../utils/seo';
 
 const LanguageContext = createContext(null);
 
@@ -33,17 +34,19 @@ export function LanguageProvider({ children }) {
     if (typeof document !== 'undefined') {
       document.documentElement.lang = initial.lang;
       document.documentElement.dir = initial.lang === 'ar' ? 'rtl' : 'ltr';
+      updateSeo(initial);
     }
     return initial;
   });
 
-  // Keep <html lang="..." dir="..."> synchronized whenever routeInfo.lang changes
+  // Keep <html lang="..." dir="..."> and SEO head metadata synchronized whenever routeInfo changes
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.documentElement.lang = routeInfo.lang;
       document.documentElement.dir = routeInfo.lang === 'ar' ? 'rtl' : 'ltr';
+      updateSeo(routeInfo);
     }
-  }, [routeInfo.lang]);
+  }, [routeInfo]);
 
   // Sync on browser back/forward buttons (popstate)
   useEffect(() => {
