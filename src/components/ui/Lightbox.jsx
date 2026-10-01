@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { X, ZoomIn, Download, ExternalLink } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function Lightbox({ src, alt, title, onClose }) {
+  const { isRTL } = useLanguage();
   const closeButtonRef = useRef(null);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function Lightbox({ src, alt, title, onClose }) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={title || 'Workflow screenshot full resolution view'}
+      aria-label={title || (isRTL ? 'معاينة لقطة الشاشة بدقة كاملة' : 'Workflow screenshot full resolution view')}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-fadeIn"
       onClick={onClose}
     >
@@ -45,7 +47,7 @@ export default function Lightbox({ src, alt, title, onClose }) {
           <div className="flex items-center gap-2.5">
             <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
             <span className="font-mono text-xs text-[#E8E6E1] font-medium truncate">
-              {title || 'Workflow Interface Screenshot'}
+              {title || (isRTL ? 'لقطة شاشة سير العمل' : 'Workflow Interface Screenshot')}
             </span>
           </div>
 
@@ -55,7 +57,7 @@ export default function Lightbox({ src, alt, title, onClose }) {
               target="_blank"
               rel="noopener noreferrer"
               className="p-1.5 rounded text-[#8A8F98] hover:text-[#E8E6E1] hover:bg-[#1E2025] transition-colors"
-              title="Open raw image in new tab"
+              title={isRTL ? "فتح الصورة الأصلية في علامة تبويب جديدة" : "Open raw image in new tab"}
             >
               <ExternalLink className="w-4 h-4" />
             </a>
@@ -65,7 +67,7 @@ export default function Lightbox({ src, alt, title, onClose }) {
               type="button"
               onClick={onClose}
               className="p-1.5 rounded text-[#8A8F98] hover:text-[#E8E6E1] hover:bg-[#1E2025] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
-              aria-label="Close Lightbox"
+              aria-label={isRTL ? "إغلاق المعاينة" : "Close Lightbox"}
             >
               <X className="w-4 h-4" />
             </button>
@@ -86,7 +88,7 @@ export default function Lightbox({ src, alt, title, onClose }) {
         {/* Bottom Metadata Bar */}
         <div className="px-4 py-2 bg-[#15171A] border-t border-[#24272C] flex items-center justify-between text-[11px] font-mono text-[#5A606A]">
           <span>VERIFIED N8N CANVAS EXECUTION</span>
-          <span>PRESS ESC TO CLOSE</span>
+          <span className={isRTL ? 'font-sans' : 'font-mono'}>{isRTL ? "اضغط ESC للإغلاق" : "PRESS ESC TO CLOSE"}</span>
         </div>
       </div>
     </div>

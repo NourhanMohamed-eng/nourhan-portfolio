@@ -1,5 +1,6 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { ZoomIn, Check, Maximize2 } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Lightbox = lazy(() => import('./Lightbox'));
 
@@ -9,6 +10,7 @@ export default function ScreenshotFrame({
   title,
   subtitle = 'n8n Canvas Execution',
 }) {
+  const { isRTL } = useLanguage();
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   return (
@@ -39,12 +41,12 @@ export default function ScreenshotFrame({
           <button
             type="button"
             onClick={() => setLightboxOpen(true)}
-            className="flex items-center justify-center gap-1.5 px-3 py-2 rounded bg-[#1B1E22] hover:bg-[#24272C] text-[#8A8F98] hover:text-[#E8E6E1] border border-[#24272C] text-[11px] font-mono transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97] shrink-0 min-w-[44px] min-h-[44px]"
-            title="Click to view full uncropped resolution in Lightbox"
-            aria-label="Expand Canvas in Lightbox"
+            className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded bg-[#1B1E22] hover:bg-[#24272C] text-[#8A8F98] hover:text-[#E8E6E1] border border-[#24272C] text-[11px] ${isRTL ? 'font-sans' : 'font-mono'} transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97] shrink-0 min-w-[44px] min-h-[44px]`}
+            title={isRTL ? "انقر للعرض بالدقة الكاملة في المعاينة" : "Click to view full uncropped resolution in Lightbox"}
+            aria-label={isRTL ? "تكبير مساحة العمل" : "Expand Canvas in Lightbox"}
           >
             <ZoomIn className="w-3.5 h-3.5 text-[#3DDC97]" />
-            <span className="hidden sm:inline">Expand Canvas</span>
+            <span className="hidden sm:inline">{isRTL ? "تكبير المساحة" : "Expand Canvas"}</span>
           </button>
         </div>
 
@@ -60,7 +62,7 @@ export default function ScreenshotFrame({
             }
           }}
           className="group relative cursor-zoom-in overflow-hidden bg-[#0E0F11] aspect-[1660/915] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3DDC97]"
-          title="Click to zoom and view full resolution"
+          title={isRTL ? "انقر للتكبير والعرض بالدقة الكاملة" : "Click to zoom and view full resolution"}
         >
           <img
             src={src}
@@ -74,9 +76,9 @@ export default function ScreenshotFrame({
 
           {/* Hover Overlay Hint */}
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#15171A]/90 backdrop-blur-sm border border-[#3DDC97]/40 text-[#E8E6E1] font-mono text-xs shadow-xl">
+            <div className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#15171A]/90 backdrop-blur-sm border border-[#3DDC97]/40 text-[#E8E6E1] ${isRTL ? 'font-sans' : 'font-mono'} text-xs shadow-xl`}>
               <Maximize2 className="w-4 h-4 text-[#3DDC97]" />
-              <span>Click to open full-resolution Lightbox</span>
+              <span>{isRTL ? "انقر لفتح المعاينة بدقة كاملة" : "Click to open full-resolution Lightbox"}</span>
             </div>
           </div>
         </div>

@@ -221,7 +221,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl text-[#E8E6E1] font-normal">
               {isRTL
-                ? "وكيل LangChain ونموذج Gemini واستدعاء الأدوات الحية."
+                ? "وكيل LangChain ونموذج Gemini واستدعاء الأدوات ديناميكيًا."
                 : "LangChain Agent, Gemini, and Dynamic Tool Calling."}
             </h2>
 

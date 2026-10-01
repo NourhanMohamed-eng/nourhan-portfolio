@@ -133,13 +133,17 @@ export function LanguageProvider({ children }) {
       window.history.pushState({}, '', fullUrl);
     }
 
-    // 3. Immediately update React state
-    setRouteInfo({
+    // 3. Immediately update React state and SEO metadata
+    const nextRoute = {
       lang: targetLang,
       isCaseStudy,
       systemId,
       pathname: nextPath,
-    });
+    };
+    if (typeof document !== 'undefined') {
+      updateSeo(nextRoute);
+    }
+    setRouteInfo(nextRoute);
   }, [routeInfo]);
 
   const content = useMemo(() => {

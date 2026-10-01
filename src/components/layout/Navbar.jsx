@@ -126,7 +126,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-11 h-11 inline-flex items-center justify-center text-[#8A8F98] hover:text-[#E8E6E1] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
-              aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              aria-label={mobileMenuOpen ? (isAr ? 'إغلاق قائمة التنقل' : 'Close Navigation Menu') : (isAr ? 'فتح قائمة التنقل' : 'Open Navigation Menu')}
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -139,7 +139,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-11 h-11 inline-flex items-center justify-center text-[#8A8F98] hover:text-[#E8E6E1] rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#3DDC97]"
-              aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              aria-label={mobileMenuOpen ? (isAr ? 'إغلاق قائمة التنقل' : 'Close Navigation Menu') : (isAr ? 'فتح قائمة التنقل' : 'Open Navigation Menu')}
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -157,7 +157,7 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3DDC97] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3DDC97]"></span>
             </span>
-            <span className="text-xs font-mono text-[#8A8F98]">{siteMeta.status}</span>
+            <span className={`text-xs ${isAr ? 'font-sans' : 'font-mono'} text-[#8A8F98]`}>{siteMeta.status}</span>
           </div>
 
           <div className="flex flex-col space-y-2">

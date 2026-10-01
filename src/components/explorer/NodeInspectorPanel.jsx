@@ -156,9 +156,9 @@ export default function NodeInspectorPanel({
           
           {/* Subtitle / Operation Badge if available */}
           {node.subtitle && (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#15171A] border border-[#24272C] font-mono text-xs text-[#8A8F98]">
+            <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#15171A] border border-[#24272C] ${isRTL ? 'font-sans' : 'font-mono'} text-xs text-[#8A8F98]`}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
-              <span>Operation: {node.subtitle}</span>
+              <span>{isRTL ? "العملية: " : "Operation: "}{node.subtitle}</span>
             </div>
           )}
 
@@ -216,8 +216,8 @@ export default function NodeInspectorPanel({
               {/* Explicit sub-connections breakdown for AI Agent */}
               {node.subConnections && (
                 <div className="pt-2 border-t border-[#1E2025] space-y-1.5 ps-1">
-                  <div className="text-[10px] uppercase text-[#A78BFA] tracking-wider font-semibold">
-                    Attached Sub-Resources:
+                  <div className={`text-[10px] uppercase text-[#A78BFA] tracking-wider font-semibold ${isRTL ? 'font-sans' : 'font-mono'}`}>
+                    {isRTL ? "الموارد الفرعية المرتبطة:" : "Attached Sub-Resources:"}
                   </div>
                   {node.subConnections.map((sub) => (
                     <div key={sub.id} className="text-[11px] text-[#8A8F98] flex items-center gap-2">
@@ -234,8 +234,8 @@ export default function NodeInspectorPanel({
 
         {/* Footer Actions */}
         <div className="p-4 bg-[#15171A] border-t border-[#24272C] flex items-center justify-between gap-3">
-          <span className="font-mono text-[10px] text-[#5A606A]">
-            PRESS ESC TO CLOSE
+          <span className={`text-[10px] text-[#5A606A] ${isRTL ? 'font-sans' : 'font-mono'}`}>
+            {isRTL ? "اضغط ESC للإغلاق" : "PRESS ESC TO CLOSE"}
           </span>
 
           {onExploreCaseStudy && system && (
