@@ -204,7 +204,6 @@ export const systems = [
       model: "Google Gemini Chat Model generates the agent's replies.",
       memory: "Simple Memory keeps recent messages so the conversation has context.",
       tools: "A Google Sheets tool lets the agent read rows from a support knowledge sheet.",
-      architecture: "LangChain Modular Agent pattern with separate sub-ports for Model, Memory, and Tool calling.",
     },
     integrations: [
       { name: "n8n", role: "Workflow Orchestrator", category: "Core Engine" },
