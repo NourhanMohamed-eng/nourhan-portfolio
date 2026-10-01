@@ -286,7 +286,7 @@ export default function CaseStudyView({ systemId, onNavigate }) {
             <span>FUNCTIONAL RESULT</span>
           </div>
           <h2 className="font-serif text-2xl text-[#E8E6E1] font-normal">
-            {isRTL ? "النتيجة التشغيلية المباشرة." : "The operational outcome."}
+            {isRTL ? "النتيجة التشغيلية." : "The operational outcome."}
           </h2>
           <p className="font-sans text-base text-[#8A8F98] leading-relaxed">
             {system.result}

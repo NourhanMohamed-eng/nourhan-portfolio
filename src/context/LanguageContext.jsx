@@ -6,16 +6,17 @@ const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
   // Parse path to determine initial language and route
-  const getRouteInfo = useCallback((pathname = window.location.pathname) => {
-    const isAr = pathname === '/ar' || pathname.startsWith('/ar/') || pathname.startsWith('/ar?');
-    const isCaseStudy = pathname.includes('/systems/');
+  const parsePath = useCallback((pathname = (typeof window !== 'undefined' ? window.location.pathname : '/')) => {
+    const cleanPath = (pathname.split('#')[0]).split('?')[0];
+    const isAr = cleanPath === '/ar' || cleanPath.startsWith('/ar/');
+    const isCaseStudy = cleanPath.includes('/systems/');
     let systemId = null;
 
     if (isCaseStudy) {
       if (isAr) {
-        systemId = pathname.replace('/ar/systems/', '').replace(/\/$/, '');
+        systemId = cleanPath.replace(/^\/ar\/systems\/?/, '').replace(/\/$/, '');
       } else {
-        systemId = pathname.replace('/systems/', '').replace(/\/$/, '');
+        systemId = cleanPath.replace(/^\/systems\/?/, '').replace(/\/$/, '');
       }
     }
 
@@ -23,44 +24,77 @@ export function LanguageProvider({ children }) {
       lang: isAr ? 'ar' : 'en',
       isCaseStudy,
       systemId,
-      pathname,
+      pathname: cleanPath,
     };
   }, []);
 
-  const [routeInfo, setRouteInfo] = useState(() => getRouteInfo());
+  const [routeInfo, setRouteInfo] = useState(() => {
+    const initial = parsePath(typeof window !== 'undefined' ? window.location.pathname : '/');
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = initial.lang;
+      document.documentElement.dir = initial.lang === 'ar' ? 'rtl' : 'ltr';
+    }
+    return initial;
+  });
 
-  // Keep <html lang="..." dir="..."> synchronized
+  // Keep <html lang="..." dir="..."> synchronized whenever routeInfo.lang changes
   useEffect(() => {
-    const { lang } = routeInfo;
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  }, [routeInfo]);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = routeInfo.lang;
+      document.documentElement.dir = routeInfo.lang === 'ar' ? 'rtl' : 'ltr';
+    }
+  }, [routeInfo.lang]);
 
-  // Sync on browser back/forward buttons
+  // Sync on browser back/forward buttons (popstate)
   useEffect(() => {
     const handlePopState = () => {
-      setRouteInfo(getRouteInfo(window.location.pathname));
+      const updated = parsePath(window.location.pathname);
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = updated.lang;
+        document.documentElement.dir = updated.lang === 'ar' ? 'rtl' : 'ltr';
+      }
+      setRouteInfo(updated);
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [getRouteInfo]);
+  }, [parsePath]);
 
   // Navigate to path within the SPA
   const navigate = useCallback((targetPath) => {
-    let resolvedPath = targetPath;
-    if (routeInfo.lang === 'ar' && !targetPath.startsWith('/ar')) {
-      resolvedPath = targetPath === '/' ? '/ar' : `/ar${targetPath}`;
-    }
-    if (resolvedPath !== window.location.pathname) {
-      window.history.pushState({}, '', resolvedPath);
-      setRouteInfo(getRouteInfo(resolvedPath));
-    }
-  }, [routeInfo.lang, getRouteInfo]);
+    const hash = targetPath.includes('#') ? targetPath.slice(targetPath.indexOf('#')) : '';
+    const cleanTargetPath = (targetPath.split('#')[0]).split('?')[0];
 
-  // Switch language preserving current view & section
+    let resolvedPath = cleanTargetPath;
+    if (routeInfo.lang === 'ar') {
+      if (!resolvedPath.startsWith('/ar')) {
+        resolvedPath = resolvedPath === '/' ? '/ar' : `/ar${resolvedPath}`;
+      }
+    } else {
+      if (resolvedPath.startsWith('/ar')) {
+        resolvedPath = resolvedPath.replace(/^\/ar/, '') || '/';
+      }
+    }
+
+    const fullUrl = hash ? `${resolvedPath}${hash}` : resolvedPath;
+
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', fullUrl);
+      const parsed = parsePath(resolvedPath);
+      // Retain current language
+      parsed.lang = routeInfo.lang;
+      if (typeof document !== 'undefined') {
+        document.documentElement.lang = routeInfo.lang;
+        document.documentElement.dir = routeInfo.lang === 'ar' ? 'rtl' : 'ltr';
+      }
+      setRouteInfo(parsed);
+      window.scrollTo(0, 0);
+    }
+  }, [routeInfo.lang, parsePath]);
+
+  // Switch language immediately updating DOM, history, and state
   const switchLanguage = useCallback((targetLang) => {
-    if (targetLang === routeInfo.lang) return;
+    if (!targetLang || targetLang === routeInfo.lang) return;
 
     try {
       localStorage.setItem('preferred_lang', targetLang);
@@ -68,26 +102,42 @@ export function LanguageProvider({ children }) {
       // localStorage may fail in restricted/private browsing modes
     }
 
+    const hash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash : '';
     let nextPath = '/';
-    const hash = window.location.hash || '';
+    let isCaseStudy = false;
+    let systemId = null;
 
     if (routeInfo.isCaseStudy && routeInfo.systemId) {
-      nextPath = targetLang === 'ar' 
+      isCaseStudy = true;
+      systemId = routeInfo.systemId;
+      nextPath = targetLang === 'ar'
         ? `/ar/systems/${routeInfo.systemId}`
         : `/systems/${routeInfo.systemId}`;
     } else {
       nextPath = targetLang === 'ar' ? '/ar' : '/';
-      if (hash) {
-        nextPath += hash;
-      }
     }
 
-    document.documentElement.lang = targetLang;
-    document.documentElement.dir = targetLang === 'ar' ? 'rtl' : 'ltr';
+    const fullUrl = hash ? `${nextPath}${hash}` : nextPath;
 
-    window.history.pushState({}, '', nextPath);
-    setRouteInfo(getRouteInfo(nextPath));
-  }, [routeInfo, getRouteInfo]);
+    // 1. Immediately update html tag attributes
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = targetLang;
+      document.documentElement.dir = targetLang === 'ar' ? 'rtl' : 'ltr';
+    }
+
+    // 2. Immediately push browser history
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', fullUrl);
+    }
+
+    // 3. Immediately update React state
+    setRouteInfo({
+      lang: targetLang,
+      isCaseStudy,
+      systemId,
+      pathname: nextPath,
+    });
+  }, [routeInfo]);
 
   const content = useMemo(() => {
     return routeInfo.lang === 'ar' ? contentAr : contentEn;
@@ -102,6 +152,7 @@ export function LanguageProvider({ children }) {
     currentPath: routeInfo.pathname,
     navigate,
     switchLanguage,
+    setLanguage: switchLanguage,
     content,
   };
 

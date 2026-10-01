@@ -87,7 +87,7 @@ export default function ContactSection() {
           {/* Email address display (shown as visible text once only) */}
           <div className="pt-2">
             <span className={`text-xs text-[#8A8F98] ${isRTL ? 'font-sans' : 'font-mono'}`}>
-              {isRTL ? "البريد المباشر: " : "Direct inbox: "}<span className="text-[#E8E6E1] font-mono" dir="ltr">{contactInfo.email}</span>
+              {isRTL ? "البريد الإلكتروني: " : "Direct inbox: "}<span className="text-[#E8E6E1] font-mono" dir="ltr">{contactInfo.email}</span>
             </span>
           </div>
 
@@ -97,39 +97,18 @@ export default function ContactSection() {
               {isRTL ? "منصات أخرى:" : "Other Profiles:"}
             </span>
 
-            {contactInfo.secondaryLinks.map((item) => {
-              if (item.isActive && item.href) {
-                return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={item.ariaLabel}
-                    className="text-[#8A8F98] hover:text-[#E8E6E1] transition-colors underline-offset-4 hover:underline py-2.5 px-1 min-h-[44px] inline-flex items-center"
-                  >
-                    {item.name}
-                  </a>
-                );
-              }
-
-              // Disabled link (Mostaql under review)
-              return (
-                <span
-                  key={item.name}
-                  aria-disabled="true"
-                  className="text-[#4A4E57] cursor-not-allowed select-none inline-flex items-center gap-1 py-2.5 px-1 min-h-[44px]"
-                  title={item.ariaLabel}
-                >
-                  <span>{item.name}</span>
-                  {item.badge && (
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#1A1D21] text-[#6A707C] border border-[#24272C]">
-                      {item.badge}
-                    </span>
-                  )}
-                </span>
-              );
-            })}
+            {contactInfo.secondaryLinks.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.ariaLabel}
+                className="text-[#8A8F98] hover:text-[#E8E6E1] transition-colors underline-offset-4 hover:underline py-2.5 px-1 min-h-[44px] inline-flex items-center"
+              >
+                {item.name}
+              </a>
+            ))}
           </div>
 
         </div>

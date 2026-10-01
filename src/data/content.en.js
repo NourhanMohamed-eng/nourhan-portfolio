@@ -47,10 +47,8 @@ export const socialLinks = [
   },
   {
     name: "Mostaql",
-    // TODO: enable when approved
-    href: "#",
-    isActive: false,
-    badge: "Pending",
+    href: "https://mostaql.com/u/Nour_Mohamed05",
+    isActive: true,
   },
   {
     name: "GitHub",
@@ -515,11 +513,9 @@ export const contactInfo = {
     },
     {
       name: "Mostaql",
-      // TODO: enable when approved
-      href: null,
-      ariaLabel: "Nourhan Mohamed on Mostaql (Under Review)",
-      isActive: false,
-      badge: "Pending",
+      href: "https://mostaql.com/u/Nour_Mohamed05",
+      ariaLabel: "Nourhan Mohamed on Mostaql",
+      isActive: true,
     },
     {
       name: "GitHub",
