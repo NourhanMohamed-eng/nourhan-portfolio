@@ -451,7 +451,7 @@ export const techStack = {
     },
     {
       category: "Web & Systems",
-      skills: ["HTML5", "CSS3", "DOM", "LocalStorage"],
+      skills: ["HTML", "CSS", "DOM", "LocalStorage"],
     },
   ],
   toolboxChain: [

@@ -203,7 +203,7 @@ export default function WorkflowStrip({
               <span className="w-2 h-2 rounded-full bg-[#3DDC97]" />
               <span className="font-mono text-xs text-[#8A8F98]">
                 {isRTL
-                  ? 'تنفيذ حقيقي وموثق لسير العمل من n8n'
+                  ? 'لقطة حقيقية من سير العمل في n8n'
                   : 'Real verified workflow implementation from n8n'}
               </span>
             </div>

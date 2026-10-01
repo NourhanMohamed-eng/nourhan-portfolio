@@ -36,7 +36,7 @@ export default function StackSection() {
 
         <p className="font-sans text-sm sm:text-base text-[#8A8F98] max-w-2xl leading-relaxed">
           {isRTL
-            ? "ليست مجرد قائمة أدوات منفصلة، بل منظومة متكاملة من محركات الأتمتة، وبروتوكولات التواصل، ونماذج الذكاء الاصطناعي، وقواعد حفظ البيانات."
+            ? "الأدوات التي أستخدمها في بناء سير العمل."
             : "Not a wall of disconnected tools, but an integrated system of automation engines, communication protocols, AI models, and data persistence layers."}
         </p>
       </div>
@@ -128,7 +128,6 @@ export default function StackSection() {
 
               <div className="mt-5 pt-3 border-t border-[#1E2025] flex items-center justify-between text-[10px] font-mono text-[#5A606A]">
                 <span>{group.skills.length} TECHNOLOGIES</span>
-                <span className="text-[#3DDC97]">READY</span>
               </div>
             </div>
           );
