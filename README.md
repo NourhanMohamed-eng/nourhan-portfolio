@@ -1,72 +1,58 @@
-# Nourhan Mohamed — AI Automation & Workflow Portfolio
+# Nourhan Mohamed — Automation Lab
 
-Editorial and technical portfolio showcasing practical workflow automation systems, custom n8n architectures, and connected business process engineering.
+A bilingual (English / Arabic) portfolio that presents n8n automation projects as interactive workflow diagrams, instead of a typical list of project cards.
 
-## 🛠️ Technologies
+**Live site:** https://nourhan-portfolio-nu.vercel.app
+**Arabic version:** https://nourhan-portfolio-nu.vercel.app/ar
 
-- **Core**: React 18, Vite
-- **Styling**: Tailwind CSS, CSS Custom Properties, Tailwind Logical Properties (`ms-`, `me-`, `ps-`, `pe-`, `start-`, `end-`)
-- **Typography**: Fraunces Variable (Headlines), Geist Sans (Body), JetBrains Mono (Technical / Code)
-- **Icons**: Lucide React
-- **Architecture Engine**: Hand-crafted interactive SVG workflow canvas engine with live trace highlighting, focus-trapped inspector drawer, and responsive mobile bottom sheet
-- **Accessibility & SEO**: WCAG 2.1 AA compliant, ARIA landmarks, keyboard-navigable diagrams, JSON-LD `Person` schema, Open Graph & Twitter meta tags
+## About the project
 
-## 🚀 Getting Started
+Each project is shown as a hand-built workflow diagram, next to the real n8n screenshot, so a visitor can see how the system works: problem, workflow, connected tools, and outcome.
 
-### Installation
+### Systems featured
+
+1. **Lead Capture & Notifications**: Webhook, data formatting, then Telegram, Gmail and Google Sheets.
+2. **AI Customer Support Agent**: Telegram, AI Agent with Google Gemini, conversation memory and a Google Sheets tool.
+3. **Automated Daily Reporting & Alerting**: Schedule trigger, Google Sheets, KPI calculation in a Code node, then Telegram and Gmail.
+
+### Features
+
+- Custom SVG workflow diagram engine (no diagram library)
+- Interactive Workflow Explorer with a node inspector panel
+- Case study pages with a screenshot lightbox
+- English and Arabic (RTL) versions, with diagrams kept left-to-right
+- Accessibility: keyboard navigation, skip link, reduced-motion support
+- Lighthouse 90+ in all categories
+
+## Tech stack
+
+React, Vite, Tailwind CSS, Lucide icons. Hosted on Vercel.
+
+## Run locally
 
 ```bash
 npm install
-```
-
-### Development Server
-
-```bash
 npm run dev
 ```
 
-Runs the development server locally (default: `http://localhost:5173/`).
-
-### Production Build
+Build for production:
 
 ```bash
 npm run build
-```
-
-Generates optimized, code-split production assets in the `dist/` directory.
-
-### Preview Production Build
-
-```bash
 npm run preview
 ```
 
-Previews the production build locally (default: `http://localhost:4173/`).
+## Project structure
 
-## 📁 Project Structure
+- `src/data/workflows.js`: nodes and edges for each system
+- `src/data/content.en.js` and `content.ar.js`: all site text
+- `src/components/`: layout, hero, systems, diagram, explorer and other sections
+- `public/screenshots/`: n8n workflow screenshots
+- `docs/`: original design prompts
 
-```text
-├── docs/                 # Original technical specification prompts
-├── public/
-│   ├── _redirects        # SPA route redirects for static hosting
-│   └── screenshots/      # High-resolution n8n workflow canvas captures
-├── src/
-│   ├── components/
-│   │   ├── about/        # Grounded academic & practical background facts
-│   │   ├── approach/     # 4-stage process automation timeline
-│   │   ├── casestudy/    # Full deep-dive workflow case studies
-│   │   ├── contact/      # Validated client inquiry & verified platform links
-│   │   ├── diagram/      # SVG workflow canvas, edges, nodes, and mobile pipelines
-│   │   ├── explorer/     # Interactive multi-tab workflow inspector
-│   │   ├── hero/         # Asymmetric hero section & live workflow simulation
-│   │   ├── layout/       # Navbar, execution line, and footer
-│   │   ├── stack/        # Connected toolchain pipeline & technology matrix
-│   │   └── ui/           # Lightbox and browser-framed screenshot previews
-│   ├── data/
-│   │   ├── content.en.js # Centralized English copy, case studies, and contact data
-│   │   └── workflows.js  # SVG node and edge coordinate geometry
-│   ├── App.jsx           # Main application router and lazy suspense boundaries
-│   └── main.jsx          # React DOM root entry point
-├── vercel.json           # Vercel SPA rewrite configuration
+## Contact
+
+Nourhan Mohamed, AI Automation & Workflow Automation Freelancer
+[LinkedIn](https://www.linkedin.com/in/nourhan-mohamed-ai) · [Khamsat](https://khamsat.com/user/nourmohamed_23)onfiguration
 └── index.html            # HTML entry point, SEO metadata, and JSON-LD schema
 ```
